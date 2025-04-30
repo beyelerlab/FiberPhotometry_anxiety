@@ -130,9 +130,9 @@ switch batchID
     %% TailSuspension SPECIFIC PARAMETERS    
     case 'test_NSFT'
 
-        dataRoot{1} =  'Y:\PhotometryAndBehavior\01_DATA\ONE_COLOR\20240205_aIC_pIC_HFD\NSFT';
+        dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\input_Rim';
         if isempty(outputFolder)
-            outputFolder = 'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\20240208_aIC_pIC_HFD\NSFT' ;
+            outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\output_Rim' ;
         end
         journalFolder = outputFolder;
                
@@ -145,12 +145,12 @@ switch batchID
         apparatus{1}.Model='';
         apparatus{1}.side_cm = 60;
         
-        videoExt{1}='avi';   
+        videoExt{1}='mp4';   
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 0;
         analysisParameters.event_analysis = 1; 
-        analysisParameters.extract_bites_from_audio = 0;
+        analysisParameters.extract_bites_from_audio = 1;
         
         
         

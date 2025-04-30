@@ -19,6 +19,7 @@ p.cameraMode = 'synchronous';
 p.ledDetectionThreshold = 50; %percent of led signal max
 p.HamamatsuFrameRate_Hz = 20;
 p.behaviorCameraFrameRate_Hz = 20;
+p.led_synchro_period_sec = 5;
 p.speedThreshold=50; % Use to clean the position data automatically, based on abnormal animal speed
 p.body2licko_distanceMax_cm = 6;
 

@@ -7,12 +7,14 @@ function Ca=analyzeRawCaSignal(experiment)
     sig = pData.sig;
     ref = pData.ref;
     t = pData.T;
+    t0 = pData.t0;
     debug = 0;
 
     frameRate_Hz = params.HamamatsuFrameRate_Hz;
     nSamples = size(sig,1);
     Ca = processBulkSignal(sig,ref,frameRate_Hz,removeFirstMinute);
     Ca.transients = get_transients(Ca.T, Ca.dff, debug);
+    Ca.t0 = t0;
 end
 
 %% Subfunctions for Bulk Signal Processing
