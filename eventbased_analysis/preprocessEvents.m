@@ -2,11 +2,25 @@ function experiment = preprocessEvents(experiment)
   
     sfreq = experiment.p.HamamatsuFrameRate_Hz;
 
-    if isfield(experiment.p,'extract_bites_from_audio')
-        [audioEvents_sec,timeLag,nSTD,audioDetectionGap_sec] = nsft_getAudioEvents_05(experiment);
-        idx_synchro = discretize(audioEvents_sec, experiment.pData.t0);
-        idx_synchro(isnan(idx_synchro))=[];        
+    if strfind(experiment.p.batchID,'NSFT')
+        if isfield(experiment.p,'extract_bites_from_audio') && experiment.p.extract_bites_from_audio
+            [audioEvents_sec,timeLag,nSTD,audioDetectionGap_sec] = nsft_getAudioEvents_05(experiment);
+            idx_synchro = discretize(audioEvents_sec, experiment.pData.t0);
+            idx_synchro(isnan(idx_synchro))=[]; 
+        else
+            if isfield(experiment.p,'extract_bites_from_txt') && experiment.p.extract_bites_from_txt
+                txt_path = [experiment.p.dataRoot filesep experiment.p.dataFileTag '.kdenlive']
+                if ~exist(txt_path,'file')
+                    fprintf('kdenlive file is missing\n');
+                else
+                    import_kdenlive_xml(txt_path)
+                    idx_synchro = load([experiment.p.dataRoot filesep experiment.p.dataFileTag '_events.txt']);
+                end
+            end
+        end
+
     else
+
         idx_synchro = findEventsIdx(experiment.vData.optoPeriod);
         dt_min_msec = experiment.p.minimum_gap_between_events_msec;
         warning(sprintf('Warning you are going to remove events that are too close to each other (dt < %d msec)',dt_min_msec));

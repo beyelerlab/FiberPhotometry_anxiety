@@ -1,0 +1,19 @@
+function import_kdenlive_xml(filename)
+[filepath,name,ext] = fileparts(filename);
+s = xml2struct(filename);
+chains =  s.mlt.chain
+chain_id = size(chains,2)
+if chain_id>1
+    chain = chains{1,chain_id}
+else
+    chain = chains
+end
+
+txt_tmp = chain.property{42}.Text;
+json_decoded = jsondecode(txt_tmp);
+fod = fopen([filepath filesep name '_events.txt'],'w');
+for i=1:size(json_decoded,1)
+    fprintf(fod,"%d\n",json_decoded(i).pos);
+end
+fclose(fod);
+    

@@ -130,9 +130,22 @@ switch batchID
     %% TailSuspension SPECIFIC PARAMETERS    
     case 'test_NSFT'
 
-        dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\input_Rim';
+        %% RIM
+        % dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\input_Rim';
+        % if isempty(outputFolder)
+        %     outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\output_Rim' ;
+        % end
+
+        %% Victor
+        % dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analaysis_of_victor_mice\input_mice_victor';
+        % if isempty(outputFolder)
+        %     outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analaysis_of_victor_mice\output_mice_victor' ;
+        % end
+
+        %% Lea 1
+        dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20241903_NSFT_photoM_B1_LP\input';
         if isempty(outputFolder)
-            outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\output_Rim' ;
+            outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20241903_NSFT_photoM_B1_LP\output';
         end
         journalFolder = outputFolder;
                
@@ -150,7 +163,9 @@ switch batchID
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 0;
         analysisParameters.event_analysis = 1; 
-        analysisParameters.extract_bites_from_audio = 1;
+        
+        analysisParameters.extract_bites_from_audio = 0;
+		analysisParameters.extract_bites_from_txt = 1;
         
         
         

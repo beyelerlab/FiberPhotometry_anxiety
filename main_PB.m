@@ -1,4 +1,5 @@
 
+
 % updated on March 8, 2022. Beyeler lab, INSERM.
 %This script calls getBatchAnalysisConfig_PB to locate the input folder
 %with three files - 1) video file in .avi format; 2) .mat file containing the fiber

@@ -2,11 +2,20 @@ function experiment = preprocessEvents(experiment)
   
     sfreq = experiment.p.HamamatsuFrameRate_Hz;
 
-    if isfield(experiment.p,'extract_bites_from_audio')
-        [audioEvents_sec,timeLag,nSTD,audioDetectionGap_sec] = nsft_getAudioEvents_05(experiment);
-        idx_synchro = discretize(audioEvents_sec, experiment.pData.t0);
-        idx_synchro(isnan(idx_synchro))=[];        
+    if strfind(experiment.p.batchID,'NSFT')
+        if isfield(experiment.p,'extract_bites_from_audio') && experiment.p.extract_bites_from_audio
+            [audioEvents_sec,timeLag,nSTD,audioDetectionGap_sec] = nsft_getAudioEvents_05(experiment);
+            idx_synchro = discretize(audioEvents_sec, experiment.pData.t0);
+            idx_synchro(isnan(idx_synchro))=[]; 
+        else
+            if isfield(experiment.p,'extract_bites_from_txt') && experiment.p.extract_bites_from_txt
+                
+                disp('here')
+            end
+        end
+
     else
+
         idx_synchro = findEventsIdx(experiment.vData.optoPeriod);
         dt_min_msec = experiment.p.minimum_gap_between_events_msec;
         warning(sprintf('Warning you are going to remove events that are too close to each other (dt < %d msec)',dt_min_msec));
@@ -29,7 +38,7 @@ function experiment = preprocessEvents(experiment)
     if strcmp(experiment.p.apparatus.type, 'EPM')
         experiment.idx_synchro = {{experiment.vData.eOA.idx, 'OpenArmEntries'}, {experiment.vData.eCA.idx, 'ClosedArmEntries'}}
     else
-        experiment.idx_synchro = {idx_synchro}
+        experiment.idx_synchro = {{idx_synchro, ''}}
     end
 
 
