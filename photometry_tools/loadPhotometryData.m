@@ -1,4 +1,4 @@
-function output = loadPhotometryData(params)
+function output = loadPhotometryData(params_)
 % Load fiber-photometry DATA
 % first valueof sig and ref are systematically aberant; if we control
 % hamamatsu from Arduino, we always get one additional value due to
@@ -6,7 +6,7 @@ function output = loadPhotometryData(params)
 % moment 3/2018, 09/2018
 
     output = [];
-    load([params.dataRoot filesep params.dataFileTag '.mat']);
+    load([params_.dataRoot filesep params_.dataFileTag '.mat']);
    
     if ~exist('ref')                
         disp('new data type')    
@@ -28,7 +28,7 @@ function output = loadPhotometryData(params)
     output.ref = ref;
     output.nSamples = size(sig,1);
     output.num0 = 1: output.nSamples;
-    output.t0 = (1: output.nSamples) / (params.HamamatsuFrameRate_Hz);
+    output.t0 = (1: output.nSamples) / (params_.HamamatsuFrameRate_Hz);
 
 
 end

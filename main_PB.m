@@ -19,7 +19,7 @@ tic;t0=toc;
 % for sucrose-quinine test - batchID='test_Sucrose-Quinine'
 % for foot shock test -  batchID='test_footshock'
 
-batchID='test_NSFT';
+batchID='test_EPM';
 
 %select and open 'getBatchAnalysisConfig_PB'. make sure that 'Function' folder
 %is also under working directory. Read and follow the instructions before
@@ -64,10 +64,22 @@ for iFolder=1:nFolders
     %% MAIN PROGRAM
     fileList = dir([p.dataRoot filesep '*.' p.videoExtension]);
     nFiles = size(fileList,1);
+    if ~nFiles
+        p.videoExtension = 'avi';
+        fileList = dir([p.dataRoot filesep '*.' p.videoExtension]);
+        nFiles = size(fileList,1);
+    end
+    if ~nFiles
+        p.videoExtension = 'mp4';
+        fileList = dir([p.dataRoot filesep '*.' p.videoExtension]);
+        nFiles = size(fileList,1);
+    end
     
     %% PROCESS EACH DATA FILE INDIVIDUALLY
     for iFile=1:nFiles
-        p.filename = fileList(iFile).name;[p.fPath, p.dataFileTag, p.ext] = fileparts(p.filename);% Parse Filename To Use Same Filename to save analysis results
+        p.filename = fileList(iFile).name;        
+        [p.fPath, p.dataFileTag , p.ext] = fileparts(p.filename);% Parse Filename To Use Same Filename to save analysis results
+        
         %% TO PROCESS ONE FILE IN PARTICUALR
         processThisFile=1;
         
