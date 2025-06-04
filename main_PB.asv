@@ -1,6 +1,3 @@
-%% time tracking
-% SD: 20231023, 0.5h
-% SD 20231025, 10 min.
 
 
 % updated on March 8, 2022. Beyeler lab, INSERM.
@@ -20,7 +17,8 @@ tic;t0=toc;
 % for elevated plus maze - batchID= 'test_EPM'
 % for open-feild test - batchID='test_OFT'
 % for sucrose-quinine test - batchID='test_Sucrose-Quinine'
-% for foot shock test -  batchID='test_Foot-shock'
+% for foot shock test -  batchID='test_footshock'
+
 batchID='test_EPM';
 
 %select and open 'getBatchAnalysisConfig_PB'. make sure that 'Function' folder
@@ -66,6 +64,15 @@ for iFolder=1:nFolders
     %% MAIN PROGRAM
     fileList = dir([p.dataRoot filesep '*.' p.videoExtension]);
     nFiles = size(fileList,1);
+    if ~nFiles
+        p.videoExtension = 
+        fileList = dir([p.dataRoot filesep '*.avi']);
+        nFiles = size(fileList,1);
+    end
+    if ~nFiles
+        fileList = dir([p.dataRoot filesep '*.mp4']);
+        nFiles = size(fileList,1);
+    end
     
     %% PROCESS EACH DATA FILE INDIVIDUALLY
     for iFile=1:nFiles
@@ -125,11 +132,13 @@ for iFolder=1:nFolders
         
         if experiment.p.event_analysis
             experiment = preprocessEvents(experiment);
-            nEventTypes = 0
             nEventTypes = size(experiment.idx_synchro,2);
-            for iEventType=0:nEventTypes
+            idx_synchro = experiment.idx_synchro;
+            for iEventType=1:nEventTypes                
+                experiment.idx_synchro = idx_synchro{iEventType};
                 experiment = eventBasedAnalysis_20250227_PB(experiment);
             end
+            experiment.idx_synchro=idx_synchro;
         end
 
            

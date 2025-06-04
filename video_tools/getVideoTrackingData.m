@@ -23,9 +23,10 @@ if ~exist(bonsaiClean,'file') || params.forceGetBodyParts
     if exist(bonsaiPath,'file')
         bonsai_output = getBonsaiData(bonsaiPath);
     else
-%         bonsaiPath=[params.dataRoot filesep params.dataFileTag '-bonsai.txt'];
-%         if exist(bonsaiPath,'file')
-%         end
+        bonsaiPath=[params.dataRoot filesep params.dataFileTag '_bonsai.csv'];
+        if exist(bonsaiPath,'file')
+            bonsai_output = getBonsaiData(bonsaiPath);
+        end
     end
     nSamples = size(bonsai_output.bodyX,1);
     flipNeeded = 0;

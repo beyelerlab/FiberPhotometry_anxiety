@@ -1,9 +1,7 @@
 clc; clear; close all
 
 % fip = "E:\NAS_SD\SuiviClient\Beyeler\DATA\20230502_NSFT\Inputs\F2434.mat"
-
-
-data_root = 'C:\Users\tbittar\Desktop\20250311_LBN3_2_EPM'
+data_root = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250401_LBN4\20250401_EPM\EPM_TMP'
 
 subdir_list = dir([data_root filesep '*'])
 n_subdir = size(subdir_list, 1);
@@ -80,7 +78,11 @@ for i=3:n_subdir
                  for k=3:n_file                     
                      n = file_list(k).name;
                      source = [folder2 filesep n];
-                     dest = [data_root filesep sprintf('%s_%s', mouse, n)];
+                     if strcmp(n,'Video.mp4')
+                         dest = [data_root filesep sprintf('%s.mp4', mouse)];
+                     else
+                         dest = [data_root filesep sprintf('%s_%s', mouse, n)];
+                     end                     
                      [status,msg,msgID] = copyfile(source, dest);                     
                  end
                  
