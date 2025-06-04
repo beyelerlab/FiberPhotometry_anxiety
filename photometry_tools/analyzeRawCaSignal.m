@@ -50,7 +50,7 @@ function [clean_zscore, zscore] = process_zscore(dff)
     
     [pks,locs,w,p] = findpeaks(zscore,'MinPeakHeight', 2.58, 'MinPeakProminence', 2);
     dff_clean = dff;
-    n_pks = size(pks, 2);
+    n_pks = size(pks, 1);
     if n_pks
         for i=1:n_pks
             x = locs(i);
