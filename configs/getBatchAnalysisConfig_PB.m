@@ -5,10 +5,10 @@ switch batchID
     
     %% OFT SPECIFIC PARAMETERS
     case 'test_OFT'                
-        dataRoot{1} =  'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\GRAB\GRAB_DA\D2-cre\aIC\OFT\input_zscore';
+        dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\OFT_Zscore\input';
         
         if isempty(outputFolder)
-            outputFolder = 'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\GRAB\GRAB_DA\D2-cre\aIC\OFT\output_zscore';
+            outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\OFT_Zscore\output';
         end
         
         journalFolder =  outputFolder;
@@ -21,7 +21,7 @@ switch batchID
         apparatus{1}.Model='Yifan';
         apparatus{1}.side_cm = 60; % Open Arms Envergure                
         
-        videoExt{1}='avi';
+        videoExt{1}='mp4';
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 0;
@@ -29,9 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-        dataRoot{1} =  'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\dLight1.1\Batch1\20220829_EPM\Input\input_zscore';
+        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\EPM_Zscore\input';
         if isempty(outputFolder)
-            outputFolder = 'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\dLight1.1\Batch1\20220829_EPM\Output\output_zscore\output_zscore_dff_good' ;
+            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\EPM_Zscore\output' ;
         end
         
         journalFolder = outputFolder;
@@ -46,7 +46,7 @@ switch batchID
         apparatus{1}.CA_cm = 75; % Closed Arms Envergure
         apparatus{1}.W_cm = 5.3;     % Arms Width
         
-        videoExt{1}='avi';
+        videoExt{1}='mp4';
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 1;
@@ -130,23 +130,23 @@ switch batchID
     %% TailSuspension SPECIFIC PARAMETERS    
     case 'test_NSFT'
 
-        %% RIM
-        % dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\input_Rim';
-        % if isempty(outputFolder)
-        %     outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\output_Rim' ;
-        % end
-
-        %% Victor
+        % % % % %% RIM
+        dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\input_Rim';
+        if isempty(outputFolder)
+            outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\output_Rim' ;
+        end
+        % 
+        % % Victor
         % dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analaysis_of_victor_mice\input_mice_victor';
         % if isempty(outputFolder)
         %     outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analaysis_of_victor_mice\output_mice_victor' ;
         % end
 
-        %% Lea 1
-        dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20241903_NSFT_photoM_B1_LP\input';
-        if isempty(outputFolder)
-            outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20241903_NSFT_photoM_B1_LP\output';
-        end
+        % % % % %% Lea 1
+        % dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20240531_NSFT_photoM_B2_LP\input_one_bite';
+        % if isempty(outputFolder)
+        %     outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20240531_NSFT_photoM_B2_LP\output_one_bite';
+        % end
         journalFolder = outputFolder;
                
         analysisParameters.apparatusNormalizationRequested = 0;
@@ -164,8 +164,8 @@ switch batchID
         analysisParameters.map_linearization = 0;
         analysisParameters.event_analysis = 1; 
         
-        analysisParameters.extract_bites_from_audio = 0;
-		analysisParameters.extract_bites_from_txt = 1;
+        analysisParameters.extract_bites_from_audio = 1;
+		analysisParameters.extract_bites_from_txt = 0;
         
         
         

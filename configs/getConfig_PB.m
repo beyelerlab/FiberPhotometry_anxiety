@@ -49,11 +49,11 @@ p.lookingForMouse = '';
 p.bonzaiDone = 1;
 
 % Event Based Analysis
-p.eventBasedAnalysisEdges_msec = [-3000:50:3000]; 
+p.eventBasedAnalysisEdges_msec = [-10000:50:10000]; 
 p.minimum_gap_between_events_msec = 1000;
 p.keep_first_and_last_events_only = 0;
-p.eventBasedAnalysisBaselineWindow_msec = [-3000 -2000];
-p.eventBasedAnalysisMinMaxWindow_msec = [-3000 3000];
+p.eventBasedAnalysisBaselineWindow_msec = [-5000 -3000];
+p.eventBasedAnalysisMinMaxWindow_msec = [-5000 2000];
 
 % If you would like to divide the analysis in sub time periods you could
 % define p.time_bins_sec = start:step:stop
@@ -62,7 +62,7 @@ p.eventBasedAnalysisMinMaxWindow_msec = [-3000 3000];
 % if you want only one period, just do p.time_bins_sec = [0 900];
 % it uses indices, so we don't count the cut period used to remove
 % photobleaching when you start at 0, the removed part will not be included
-p.time_bins_sec=[0:300:900];
+p.time_bins_sec=[0:960];
 
 % p.firstLickTh_msec = 10000;
 

@@ -35,23 +35,23 @@ function Ca = processBulkSignal(sig,ref,frameRate_Hz,removeFirstMinute)
     
     [Ca.zscore, Ca.clean_zscore] = process_zscore(Ca.dff);
     
-    Ca.mainSig = Ca.zscore; 
+    Ca.mainSig = Ca.dff; 
 
 end
 
 function [clean_zscore, zscore] = process_zscore(dff)
 
-     mean_bl = nanmean(dff);
-     std_bl = nanstd(dff);
-     zscore = (dff - mean_bl) / std_bl;
-     
-      nSamples = max(size(dff));
-     
-     [pks,locs,w,p] = findpeaks(zscore,'MinPeakHeight', 2.58, 'MinPeakProminence', 2);
-     dff_clean = dff;
+    mean_bl = nanmean(dff);
+    std_bl = nanstd(dff);
+    zscore = (dff - mean_bl) / std_bl;
+    
+    nSamples = max(size(dff));
+    
+    [pks,locs,w,p] = findpeaks(zscore,'MinPeakHeight', 2.58, 'MinPeakProminence', 2);
+    dff_clean = dff;
     n_pks = size(pks, 2);
     for i=1:n_pks
-        x = locs(i);      
+        x = locs(i);
         i1 = floor(x - w(i));
         i2 = floor(x + w(i));
         i1 = max([i1,1]);
@@ -62,7 +62,7 @@ function [clean_zscore, zscore] = process_zscore(dff)
     mean_bl = nanmean(dff_clean);
     std_bl = nanstd(dff_clean);
     clean_zscore = (dff - mean_bl) / std_bl;
-    
+
 end
 
 function fit_ = fit_iso(iso, physio)

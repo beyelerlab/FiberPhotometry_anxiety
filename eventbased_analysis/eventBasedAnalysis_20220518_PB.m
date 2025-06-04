@@ -37,6 +37,14 @@ end
 [experiment.pData.bulkPETH.matrix,experiment.pData.transientsPETH.matrix] = getPSTHData(idx_synchro,bulkSignal,idx_transients,edges_msec,sfreq,nFrames);
 %experiment.pData.eventsPETH = experiment.pData.num0(idx_synchro);
 [r,c]=size(experiment.pData.bulkPETH.matrix);
+
+% 
+% experiment.pData.bulkPETH.matrix = experiment.pData.bulkPETH.matrix(1, :);
+% experiment.pData.transientsPETH.matrix = experiment.pData.transientsPETH.matrix(1, :);
+% r = 1;  % Forcer le bloc "else" pour prendre que le premier event 
+
+
+
 if r>1
     experiment.pData.bulkPETH.nanmean = nanmean(experiment.pData.bulkPETH.matrix);
     experiment.pData.bulkPETH.nanstd = nanstd(experiment.pData.bulkPETH.matrix);
@@ -48,12 +56,6 @@ else
     experiment.pData.transientsPETH.nanmean = experiment.pData.transientsPETH.matrix;
     experiment.pData.transientsPETH.nanstd = nan(1,c);
 end
-
-
-
-
-
-
 
 
 
