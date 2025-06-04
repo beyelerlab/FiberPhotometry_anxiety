@@ -35,7 +35,7 @@ function Ca = processBulkSignal(sig,ref,frameRate_Hz,removeFirstMinute)
     
     [Ca.zscore, Ca.clean_zscore] = process_zscore(Ca.dff);
     
-    Ca.mainSig = Ca.dff; 
+    Ca.mainSig = Ca.zscore; 
 
 end
 
@@ -85,7 +85,7 @@ function dff = calculate_dff(iso_fit, physio)
 %     physio = physio - min_ + 1;
 %     iso_fit = iso_fit - min_ + 1;
     dff = (physio-iso_fit)./iso_fit;
-    %dff = dff * 100;
+    dff = dff * 100;
 end
 
 
