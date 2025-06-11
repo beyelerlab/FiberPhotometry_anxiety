@@ -19,7 +19,7 @@ tic;t0=toc;
 % for sucrose-quinine test - batchID='test_Sucrose-Quinine'
 % for foot shock test -  batchID='test_footshock'
 
-batchID='test_OFT';
+batchID='test_footshock';
 
 %select and open 'getBatchAnalysisConfig_PB'. make sure that 'Function' folder
 %is also under working directory. Read and follow the instructions before
@@ -128,6 +128,18 @@ for iFolder=1:nFolders
             for iEventType=1:nEventTypes                
                 experiment.idx_synchro = idx_synchro{iEventType};
                 experiment = eventBasedAnalysis_20250227_PB(experiment);
+                if experiment.p.spatial_analysis
+                    experiment = eventBasedFreezingAnalysis_PB(experiment);
+                end
+
+
+
+
+
+
+
+
+
             end
             experiment.idx_synchro=idx_synchro;
         end

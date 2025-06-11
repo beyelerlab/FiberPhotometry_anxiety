@@ -56,13 +56,19 @@ p.eventBasedAnalysisBaselineWindow_msec = [-5000 -3000];
 p.eventBasedAnalysisMinMaxWindow_msec = [-5000 2000];
 
 % If you would like to divide the analysis in sub time periods you could
-% define p.time_bins_sec = start:step:stop
-% p.time_bins_sec = 60:300:1860
-% you can also define them one by one like p.time_bins_sec = [60,160,360,660]
-% if you want only one period, just do p.time_bins_sec = [0 900];
+
+% define a serie of periods, p.time_bins_sec = start:step:stop
+% p.time_bins_sec = 0:300:1200
+
+% you can also define periods of different duration, define them one by one like p.time_bins_sec = [0,100,300,600]
+
+% if you want only one period [start stop], just do p.time_bins_sec = [0 900];
+
 % it uses indices, so we don't count the cut period used to remove
 % photobleaching when you start at 0, the removed part will not be included
-p.time_bins_sec=[0:960];
+
+p.time_bins_sec = 0:300:1200;
+
 
 % p.firstLickTh_msec = 10000;
 

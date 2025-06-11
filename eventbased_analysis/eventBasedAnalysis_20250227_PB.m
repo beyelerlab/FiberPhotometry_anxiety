@@ -249,7 +249,7 @@ function experiment = writeOutputFile(experiment, varNames)
         
         varSubNames = split(varName,'.');  
                 
-        filename = [p.batch_ouputFile(1:end-4) sprintf('-%s-eventAnlaysis_%s_%s.txt',event_name,varSubNames{3},varSubNames{4})];
+        filename = [p.batch_ouputFile(1:end-4) sprintf('-%s-eventAnalysis_%s_%s.txt',event_name,varSubNames{3},varSubNames{4})];
         
         fods(iVar) = fopen(filename,'a');
         

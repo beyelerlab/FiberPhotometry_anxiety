@@ -29,9 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\EPM_Zscore\input';
+        dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\EPM_Zscore\input'
         if isempty(outputFolder)
-            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\EPM_Zscore\output' ;
+            outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\EPM_Zscore\output_df'
         end
         
         journalFolder = outputFolder;
@@ -106,24 +106,25 @@ switch batchID
         %% TailSuspension SPECIFIC PARAMETERS    
     case 'test_footshock'
 
-        dataRoot{1} =  'S:\_Yoni\20250227_Meeting_Seb\Data_to_use\FS_First_Last\input';
+        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\input';
         if isempty(outputFolder)
-            outputFolder = 'S:\_Yoni\20250227_Meeting_Seb\Data_to_use\FS_First_Last\output' ;
+            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\output' ;
         end
         journalFolder = outputFolder;
                
         analysisParameters.apparatusNormalizationRequested = 0;
-        analysisParameters.apparatusCenterZoneSize_propOfTotalArea = 0.1;
+        analysisParameters.apparatusCenterZoneSize_propOfTotalArea = 0.00001;
         analysisParameters.MouseCoordinatesCentroid = 'Body';
         analysisParameters.MapScale_cmPerBin = 0.5;
                 
-        apparatus{1}.type='';
+        apparatus{1}.type='Fear';
         apparatus{1}.Model='';
-        apparatus{1}.side_cm = 0; 
+        apparatus{1}.width_cm = 48; 
+        apparatus{1}.height_cm = 25.4; 
         
-        videoExt{1}='avi';   
+        videoExt{1}='mp4';   
                 
-        analysisParameters.spatial_analysis = 0;
+        analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 0;
         analysisParameters.event_analysis = 1;         
         

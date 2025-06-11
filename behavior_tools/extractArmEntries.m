@@ -15,6 +15,7 @@ end
 
 n = size(z);
 for i=1:n
+    
     if ~z(i)
         if i>1, z(i) = z(i-1);end
     end

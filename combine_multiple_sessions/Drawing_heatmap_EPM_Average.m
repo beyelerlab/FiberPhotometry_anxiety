@@ -4,14 +4,14 @@ clear all; clc
 
 %   load('mamap.mat');
 
-path='C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\PLOT\HFD_pIC';
-outputpath='C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\PLOT\HFD_pIC';
+path='C:\Users\lpages\Desktop\all_pIC_Zscore_dff\EPM_Zscore\heat_maps_zscore\SD';
+outputpath='C:\Users\lpages\Desktop\all_pIC_Zscore_dff\EPM_Zscore\heat_maps_zscore\SD';
 
 dirOutput=dir(fullfile(path,'*.mat'));
 fileNames={dirOutput.name};
 n=length(fileNames);
-map=nan(120,120,n);
-occ_map = nan(120,120,n);
+map=nan(150,150,n);
+occ_map = nan(150,150,n);
 
 
 for i=1:n
@@ -102,13 +102,13 @@ hold on
 x2=[x(1), x(2), x(3), x(4)];
 y2=[y(1), y(2), y(3), y(4)];
 plot(x2, y2, '--k', 'linewidth',1)
-% x3=[x(8), x(9), x(10), x(11)];
-% y3=[y(8), y(9), y(10), y(11)];
-% plot(x3, y3, 'k', 'linewidth',1)
-% hold on
-% x4=[x(2), x(3), x(4), x(5)];
-% y4=[y(2), y(3), y(4), y(5)];
-% plot(x4, y4, 'k', 'linewidth',1)
+x3=[x(8), x(9), x(10), x(11)];
+y3=[y(8), y(9), y(10), y(11)];
+plot(x3, y3, 'k', 'linewidth',1)
+hold on
+x4=[x(2), x(3), x(4), x(5)];
+y4=[y(2), y(3), y(4), y(5)];
+plot(x4, y4, 'k', 'linewidth',1)
 
 print(filename,'-depsc','-painters','-r1200');
 print(filename, '-dpdf');

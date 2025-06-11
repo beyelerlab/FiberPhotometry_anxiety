@@ -89,6 +89,15 @@ switch p.apparatus.type
         ampX = abs(x2-x1);
         ampY = abs(y2-y1);
         p.apparatus.ref_pix = ampX;
+
+    case 'Fear'         
+        x1 = vData.corners.x(1);
+        y1 = vData.corners.y(1);
+        x2 = vData.corners.x(2);
+        y2 = vData.corners.y(2);
+        ampX = abs(x2-x1);
+        ampY = abs(y2-y1);
+        p.apparatus.ref_pix = ampX;
         
     case 'NSFT'         
         x1 = vData.corners.x(1);
@@ -205,7 +214,9 @@ switch p.apparatus.type
     case 'NSFT'
         p.apparatus.ref_cm = p.apparatus.side_cm;
     case 'HOMECAGE-FD'         
-        p.apparatus.ref_cm = p.apparatus.side1_cm;        
+        p.apparatus.ref_cm = p.apparatus.side1_cm;  
+    case 'Fear'         
+        p.apparatus.ref_cm = p.apparatus.width_cm;     
     case 'OFT'
         p.apparatus.ref_cm = p.apparatus.side_cm;
     case 'SI'

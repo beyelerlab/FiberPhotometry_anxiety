@@ -1,6 +1,6 @@
   clear all; clc
-  path=['C:\Users\epetru\Desktop\Behavioral Analysis\aIC-BLA Eli\NSFT\20230502_NSFT_aIC-BLA\Outputs\HFD plot'];
-  outputpath=['C:\Users\epetru\Desktop\Behavioral Analysis\aIC-BLA Eli\NSFT\20230502_NSFT_aIC-BLA\Outputs\HFD plot'];
+  path=['C:\Users\lpages\Desktop\all_pIC_Zscore_dff\OFT_Zscore\heat_maps_dff\HFD'];
+  outputpath=['C:\Users\lpages\Desktop\all_pIC_Zscore_dff\OFT_Zscore\heat_maps_dff\HFD'];
   dirOutput=dir(fullfile(path,'*.mat'));
   fileNames={dirOutput.name};
   n=length(fileNames); 

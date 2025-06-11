@@ -13,7 +13,7 @@ function experiment = getZonesStatistics_TimeBins_PB(experiment)
         pause
     end
 
-    varNames = {'timeInZone_sec', 'bulkSignal', 'transientsAmplitude.', 'transientsFrequency'};        
+    varNames = {'timeInZone_sec', 'bulkSignal', 'transientsAmplitude.', 'transientsFrequency', 'freezing'};        
    
     
     [fods, p] = createFiles(varNames, p, vData.nZones);
@@ -36,15 +36,18 @@ function experiment = getZonesStatistics_TimeBins_PB(experiment)
         selected_transients = select_transients(pData.transients, iFrame1, iFrame2)
         
         pData.transientPeriodStats{iTimePeriod}=transientsPerZone(inZone,nZones,zoneTime_fr_tmp,selected_transients);
-        pData.bulkPeriodStats{iTimePeriod} = bulkSignalPerZone(inZone_tmp,nZones,zoneTime_fr_tmp,pData.mainSig(iFrame1:iFrame2));           
-               
+        pData.bulkPeriodStats{iTimePeriod} = bulkSignalPerZone(inZone_tmp,nZones,zoneTime_fr_tmp,pData.mainSig(iFrame1:iFrame2));
+        
+                     
         if ~isfield(vData.videoInfo,'FrameRate')
             framerate = 20;
         else
             framerate = vData.videoInfo.FrameRate;
         end
+
+        vData.freezingPeriodStats{iTimePeriod} = freezingSignalPerZone(inZone_tmp,nZones,zoneTime_fr_tmp,vData.freezing(iFrame1:iFrame2), framerate);  
         
-        datas = {(zoneTime_fr_tmp'/framerate), pData.bulkPeriodStats{iTimePeriod }.zonesMeanAmp, pData.transientPeriodStats{iTimePeriod}.zonesMeanAmp, (pData.transientPeriodStats{iTimePeriod}.zonesCounts./(zoneTime_fr_tmp'/framerate))};
+        datas = {(zoneTime_fr_tmp'/framerate), pData.bulkPeriodStats{iTimePeriod }.zonesMeanAmp, pData.transientPeriodStats{iTimePeriod}.zonesMeanAmp, (pData.transientPeriodStats{iTimePeriod}.zonesCounts./(zoneTime_fr_tmp'/framerate)), vData.freezingPeriodStats{iTimePeriod}.zonesFreezingTime};
         popFiles(fods, varNames, datas, vData.nZones)
                 
         iFrame1 = iFrame2+1;
