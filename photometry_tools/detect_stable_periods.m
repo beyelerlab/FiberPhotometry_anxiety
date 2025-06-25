@@ -1,4 +1,4 @@
-HamamatsuFrameRate_Hz = 20;
+HamamatsuFrameRate_Hz = 30;
 windowSize = HamamatsuFrameRate_Hz*5; % Sliding window size (number of points)
 
 dff_color = [49/255, 92/255, 43/255];

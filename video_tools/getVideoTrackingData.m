@@ -23,10 +23,9 @@ if ~exist(bonsaiClean,'file') || params.forceGetBodyParts
     if exist(bonsaiPath,'file')
         bonsai_output = getBonsaiData(bonsaiPath);
     else
-        bonsaiPath=[params.dataRoot filesep params.dataFileTag '_bonsai.csv'];
-        if exist(bonsaiPath,'file')
-            bonsai_output = getBonsaiData(bonsaiPath);
-        end
+%         bonsaiPath=[params.dataRoot filesep params.dataFileTag '-bonsai.txt'];
+%         if exist(bonsaiPath,'file')
+%         end
     end
     nSamples = size(bonsai_output.bodyX,1);
     flipNeeded = 0;
@@ -127,7 +126,7 @@ end
     if ~isfield(bonsai_output.videoInfo,'FrameRate')
         bonsai_output.videoInfo=getVideoInfo(params);    
         if ~isfield(bonsai_output.videoInfo,'FrameRate')
-            framerate = 20;
+            framerate = 30;
         end
     else
         framerate=bonsai_output.videoInfo.FrameRate;

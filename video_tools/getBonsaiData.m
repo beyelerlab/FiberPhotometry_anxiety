@@ -1,7 +1,7 @@
 function bonsai_output = getBonsaiData(bonsaiPath)
 
 loading_done = 0;
-fprintf('\n\tloading bonsai file\n')
+fprintf('\n\tloading bonsaï file\n')
 if exist(bonsaiPath,'file')
 
     try
@@ -13,9 +13,9 @@ if exist(bonsaiPath,'file')
         bonsai_output.bodyX = bonsai_output.mouseX;
         bonsai_output.bodyY = bonsai_output.mouseY;
         loading_done = 1;
-        fprintf('\tnew way of loading bonsai file works\n')
+        fprintf('\tnew way of loading bonsaï file works\n')
     catch
-        fprintf('\tnew way of loading bonsai file does not work, we try the old way\n')
+        fprintf('\tnew way of loading bonsaï file does not work, we try the old way\n')
     end
     
     if ~loading_done

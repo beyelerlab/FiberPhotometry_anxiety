@@ -1,3 +1,6 @@
+%% time tracking
+% SD: 20231023, 0.5h
+% SD 20231025, 10 min. 
 
 
 % updated on March 8, 2022. Beyeler lab, INSERM.
@@ -17,10 +20,9 @@ tic;t0=toc;
 % for elevated plus maze - batchID= 'test_EPM'
 % for open-feild test - batchID='test_OFT'
 % for sucrose-quinine test - batchID='test_Sucrose-Quinine'
-% for foot shock test -  batchID='test_footshock'
-
-batchID='test_OFThu';
-
+% for foot shock test -  batchID='test_Foot-shock'
+batchID='test_EPM';
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 %select and open 'getBatchAnalysisConfig_PB'. make sure that 'Function' folder
 %is also under working directory. Read and follow the instructions before
 %coming back to this script and running it.
@@ -64,22 +66,10 @@ for iFolder=1:nFolders
     %% MAIN PROGRAM
     fileList = dir([p.dataRoot filesep '*.' p.videoExtension]);
     nFiles = size(fileList,1);
-    if ~nFiles
-        p.videoExtension = 'avi';
-        fileList = dir([p.dataRoot filesep '*.' p.videoExtension]);
-        nFiles = size(fileList,1);
-    end
-    if ~nFiles
-        p.videoExtension = 'mp4';
-        fileList = dir([p.dataRoot filesep '*.' p.videoExtension]);
-        nFiles = size(fileList,1);
-    end
     
     %% PROCESS EACH DATA FILE INDIVIDUALLY
     for iFile=1:nFiles
-        p.filename = fileList(iFile).name;        
-        [p.fPath, p.dataFileTag , p.ext] = fileparts(p.filename);% Parse Filename To Use Same Filename to save analysis results
-        
+        p.filename = fileList(iFile).name;[p.fPath, p.dataFileTag, p.ext] = fileparts(p.filename);% Parse Filename To Use Same Filename to save analysis results
         %% TO PROCESS ONE FILE IN PARTICUALR
         processThisFile=1;
         
@@ -134,14 +124,7 @@ for iFolder=1:nFolders
         end
         
         if experiment.p.event_analysis
-            experiment = preprocessEvents(experiment);
-            nEventTypes = size(experiment.idx_synchro,2);
-            idx_synchro = experiment.idx_synchro;
-            for iEventType=1:nEventTypes                
-                experiment.idx_synchro = idx_synchro{iEventType};
-                experiment = eventBasedAnalysis_20250227_PB(experiment);
-            end
-            experiment.idx_synchro=idx_synchro;
+            experiment = eventBasedAnalysis_20220518_PB(experiment);
         end
 
            

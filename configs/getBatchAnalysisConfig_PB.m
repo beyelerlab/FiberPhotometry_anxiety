@@ -5,10 +5,10 @@ switch batchID
     
     %% OFT SPECIFIC PARAMETERS
     case 'test_OFT'                
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250528_LBN5\20250602_LBN5.2\20250606_OFT_LBN5.2\Analysis\Input';
+        dataRoot{1} =  'S:\___DATA\Photometry and behavior-parts\02_ANALYSIS\20250224_GCaMP_5HT1A_batch1\OFT\Input';
         
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250528_LBN5\20250602_LBN5.2\20250606_OFT_LBN5.2\Analysis\Output';
+            outputFolder = 'S:\___DATA\Photometry and behavior-parts\02_ANALYSIS\20250224_GCaMP_5HT1A_batch1\OFT\Output';
         end
         
         journalFolder =  outputFolder;
@@ -29,9 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250528_LBN5\20250602_LBN5.2\20250602_EPM_LBN5.2\Analysis\Input';
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250401_LBN4\20250401_EPM\EPM\Analysis\input';
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250528_LBN5\20250602_LBN5.2\20250602_EPM_LBN5.2\Analysis\Output' ;
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250401_LBN4\20250401_EPM\EPM\Analysis\output';
         end
         
         journalFolder = outputFolder;
@@ -46,17 +46,15 @@ switch batchID
         apparatus{1}.CA_cm = 75; % Closed Arms Envergure
         apparatus{1}.W_cm = 5.3;     % Arms Width
         
-        videoExt{1}='avi';
+        videoExt{1}='mp4';
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 1;
-
-        %To analyse arm entries or arm exits
         analysisParameters.event_analysis = 0;
                          
        
     %% Sucrose In OFT SPECIFIC PARAMETERS
-    case 'test_SQ'
+    case 'CN_Sucrose_20220518'
         
         dataRoot{1} =  'S:\_Céline\Manips\Manip for paper anxiety\2. REVISION 2\QUININE ALL\INPUT pIC';
         if isempty(outputFolder)
@@ -80,7 +78,7 @@ switch batchID
         analysisParameters.event_analysis = 1;
         
     %% TailSuspension SPECIFIC PARAMETERS    
-    case 'test_TS'
+    case 'CN_TailSuspension_20220518'
 
         dataRoot{1} =  'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\20240208_aIC_pIC_HFD\20240220_Tailsuspension\input';
         if isempty(outputFolder)
@@ -104,11 +102,11 @@ switch batchID
         analysisParameters.event_analysis = 1;      
         
         %% TailSuspension SPECIFIC PARAMETERS    
-    case 'test_footshock'
+    case 'CN_FootShocks_20220518'
 
-        dataRoot{1} =  'S:\_Yoni\20250227_Meeting_Seb\Data_to_use\FS_First_Last\input';
+        dataRoot{1} =  'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\GRAB\GRAB_DA\D1-cre\aIC\Batch4\20230331_FS\Input\input_zscore';
         if isempty(outputFolder)
-            outputFolder = 'S:\_Yoni\20250227_Meeting_Seb\Data_to_use\FS_First_Last\output' ;
+            outputFolder = 'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\GRAB\GRAB_DA\D1-cre\aIC\Batch4\20230331_FS\Output\output_zscore' ;
         end
         journalFolder = outputFolder;
                
@@ -130,22 +128,9 @@ switch batchID
     %% TailSuspension SPECIFIC PARAMETERS    
     case 'test_NSFT'
 
-        %% RIM
-        % dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\input_Rim';
-        % if isempty(outputFolder)
-        %     outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\output_Rim' ;
-        % end
-
-        %% Victor
-        % dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analaysis_of_victor_mice\input_mice_victor';
-        % if isempty(outputFolder)
-        %     outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analaysis_of_victor_mice\output_mice_victor' ;
-        % end
-
-        %% Lea 1
-        dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20241903_NSFT_photoM_B1_LP\input';
+        dataRoot{1} =  'Y:\PhotometryAndBehavior\01_DATA\ONE_COLOR\20240205_aIC_pIC_HFD\NSFT';
         if isempty(outputFolder)
-            outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20241903_NSFT_photoM_B1_LP\output';
+            outputFolder = 'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\20240208_aIC_pIC_HFD\NSFT' ;
         end
         journalFolder = outputFolder;
                
@@ -158,14 +143,12 @@ switch batchID
         apparatus{1}.Model='';
         apparatus{1}.side_cm = 60;
         
-        videoExt{1}='mp4';   
+        videoExt{1}='avi';   
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 0;
         analysisParameters.event_analysis = 1; 
-        
         analysisParameters.extract_bites_from_audio = 0;
-		analysisParameters.extract_bites_from_txt = 1;
         
         
         

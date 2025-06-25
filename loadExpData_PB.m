@@ -3,8 +3,7 @@ function experiment = loadExpData_PB(p)
 %%  LOADING, SYNCHRONIZING AND CLEANING THE DATA
 vData = getVideoTrackingData(p);
 % vData.bg=getBackGroundSlow(p);
-pData = loadPhotometryData(p);
-
+[pData, p] = loadPhotometryData(p);
 
 % if ~isfield(vData.videoInfo,'FrameRate')
 %     vData.videoInfo=getVideoInfo(p);
@@ -22,7 +21,25 @@ end
 
 if (framerate ~= p.HamamatsuFrameRate_Hz)
     warning('Program could not work if behavioral camera and hamamatsu camera have different frame rates');
+    protectedFields = {'distance', 'videoInfo', 'nSamples0', 'num0', 't0'}
+    vDataFields = fieldnames(vData);
+    vDataFields = setdiff(vDataFields,protectedFields)
+    nDataFields = size(vDataFields,1);
+    x = squeeze(vData.t0);
+    xq = pData.t0/1000;
+    for i=1:nDataFields
+        curField = vDataFields{i}
+        v = getfield(vData, curField);
+        vq = interp1(x, v, xq);
+        vData = setfield(vData, curField, vq);       
+    end
+    vData = getDistance(vData);
+    vData.nSamples0 = size(xq,1);
+    vData.num0 = 1:vData.nSamples0;
+    vData.t0 = xq;
+    vData.videoInfo.FrameRate = p.HamamatsuFrameRate_Hz;
     if p.protectMe, pause; end
+
 end
 
 % switch p.apparatus.type
@@ -54,7 +71,7 @@ end
 % 
 % end
 
-if p.bonzaiDone
+if p.bonzaiDone && strcmp(p.system, 'FIP')
     [pData,vData] =  HamamatsuBlackFlyCorrectFrameNumbers(pData,vData,p);
 end
 
@@ -101,7 +118,7 @@ if isempty(iBehavioralStarts), iBehavioralStarts=0; end
 % end
 
 %% DETECT EXPERIMENTER STARTS BEHAVIOR
-nFramesToRemove = max([p.HamamatsuFrameRate_Hz*p.remove_high_bleaching_period_sec iBehavioralStarts(1)]); %remove the first minute of the signal due to bleeching at the beginning of the fiber-photometry recording
+nFramesToRemove = ceil(max([p.HamamatsuFrameRate_Hz*p.remove_high_bleaching_period_sec iBehavioralStarts(1)])); %remove the first minute of the signal due to bleeching at the beginning of the fiber-photometry recording
 
 %% DETECT EXPERIMENTER STARTS BEHAVIOR IS TOO DIFFICULT FOR NSFT
 if strcmp(p.apparatus.type,'NSFT')

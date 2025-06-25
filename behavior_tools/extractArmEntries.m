@@ -9,13 +9,12 @@ else
 end
 
 
-%When animal detection was bad, we placed the animal in zone 0
+%When animal detection was bad, w eplaced the animal in zone 0
 % To avoid  conting zone_0 entrances we remove them
 % using the prev. pos of the animal
 
 n = size(z);
 for i=1:n
-    
     if ~z(i)
         if i>1, z(i) = z(i-1);end
     end

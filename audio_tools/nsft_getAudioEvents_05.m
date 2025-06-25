@@ -18,7 +18,7 @@ if ~exist(figureSubFolder,'dir'),mkdir(figureSubFolder);end
 figName = [figureSubFolder filesep params.dataFileTag '-' suffix '.jpeg'];
 
 
-if ~exist(audioEvents_path,'file')
+if 1 %~exist(audioEvents_path,'file')
     
     sideview_videoPath = [sideviewRoot filesep params.dataFileTag '-sideview.mp4'];
     if ~exist(sideview_videoPath,'file'), fprintf('sideview video is missing\n');end

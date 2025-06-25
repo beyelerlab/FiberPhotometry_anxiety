@@ -13,13 +13,12 @@ idx_transients = [experiment.pData.transients(:).loc];
 if isfield(experiment.p,'extract_bites_from_audio')
     [audioEvents_sec,timeLag,nSTD,audioDetectionGap_sec] = nsft_getAudioEvents_05(experiment);
     idx_synchro = discretize(audioEvents_sec, experiment.pData.t0);
-    idx_synchro(isnan(idx_synchro))=[];        
+    idx_synchro(isnan(idx_synchro))=[];
+    
+    
 else
     idx_synchro = findEventsIdx(experiment.vData.optoPeriod);
-    dt_min_msec = experiment.p.minimum_gap_between_events_msec;
-    warning(sprintf('Warning you are going to remove events that are too close to each other (dt < %d msec)',dt_min_msec));
-    beep();
-    idx_synchro=cleanEvents(idx_synchro,dt_min_msec,sfreq);
+    idx_synchro=cleanEvents(idx_synchro,experiment.p.minimum_gap_between_events_msec,sfreq);
     warning('cleaning events only works for home-made Hamamatsu system');
 end
 
@@ -29,22 +28,9 @@ if isempty(idx_synchro)
     pause
 end
 
-if experiment.p.keep_first_and_last_events_only
-    tmp = idx_synchro;
-    idx_synchro = [tmp(1);tmp(end)];
-end
-
 [experiment.pData.bulkPETH.matrix,experiment.pData.transientsPETH.matrix] = getPSTHData(idx_synchro,bulkSignal,idx_transients,edges_msec,sfreq,nFrames);
 %experiment.pData.eventsPETH = experiment.pData.num0(idx_synchro);
 [r,c]=size(experiment.pData.bulkPETH.matrix);
-
-% 
-% experiment.pData.bulkPETH.matrix = experiment.pData.bulkPETH.matrix(1, :);
-% experiment.pData.transientsPETH.matrix = experiment.pData.transientsPETH.matrix(1, :);
-% r = 1;  % Forcer le bloc "else" pour prendre que le premier event 
-
-
-
 if r>1
     experiment.pData.bulkPETH.nanmean = nanmean(experiment.pData.bulkPETH.matrix);
     experiment.pData.bulkPETH.nanstd = nanstd(experiment.pData.bulkPETH.matrix);
@@ -56,6 +42,12 @@ else
     experiment.pData.transientsPETH.nanmean = experiment.pData.transientsPETH.matrix;
     experiment.pData.transientsPETH.nanstd = nan(1,c);
 end
+
+
+
+
+
+
 
 
 
