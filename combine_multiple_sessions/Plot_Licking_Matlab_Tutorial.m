@@ -16,6 +16,8 @@ for i=1:n
     animal_Tag(1,i)=tmp_file(1:end-4);
     tmp_path=[path filesep tmp_file];
     load(tmp_path)
+
+ 
     
     if isfield(experiment.pData,'avgBulkSignalAroundFood')
         SignalaroundLicking(i,:) = experiment.pData.avgBulkSignalAroundFood;
