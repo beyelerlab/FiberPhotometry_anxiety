@@ -31,6 +31,8 @@ if (framerate ~= p.HamamatsuFrameRate_Hz)
         curField = vDataFields{i}
         v = getfield(vData, curField);
         vq = interp1(x, v, xq);
+        [r,c] = size(vq);
+        if (r<c), vq = vq';end
         vData = setfield(vData, curField, vq);       
     end
     vData = getDistance(vData);
@@ -163,12 +165,12 @@ pData = detectAbnormalNegativeValuesInPhotometryRawData(pData);
 vData=cleanPosBasedOnSpeedThreshold(vData,p); % remove all position when animal speed exceed 20 pixel per sec.
 
 %% CREATES TIME VECTOR
-nFrames = size(vData.mainX,1);T = 1: nFrames;T = T./ p.HamamatsuFrameRate_Hz;  pData.T = T; vData.nFrames = nFrames; %recreate time vector based on fiber-photometry frame rate
+nFrames = max(size(vData.mainX));T = 1: nFrames;T = T./ p.HamamatsuFrameRate_Hz;  pData.T = T; vData.nFrames = nFrames; %recreate time vector based on fiber-photometry frame rate
 
 % delete if code doesn't ask for it
 % vData_includingDisconnectionPeriods.nFrames = nFrames;
 
-if size(pData.sig,1) ~= size(vData.mainX,1)
+if max(size(pData.sig)) ~= max(size(vData.mainX))
     fprintf('\t#Hamamatsu %d',size(pData.sig,1));fprintf('\t\t#BlackFly %d\n',size(vData.mainX,1));
     pause;
 end

@@ -9,9 +9,9 @@ function [photometryData,videoTrackingData]=HamamatsuBlackFlyCorrectFrameNumbers
  nFields=size(fields,1);
  
  Treatement = zeros(nFields,1);
- nFramesBlackFly = size(videoTrackingData.mainX,1);
+ nFramesBlackFly = max(size(videoTrackingData.mainX));
  for iField = 1:nFields
-     cmdSTR = sprintf('tmpSize=size(videoTrackingData.%s,1);',fields{iField});
+     cmdSTR = sprintf('tmpSize=max(size(videoTrackingData.%s));',fields{iField});
      eval(cmdSTR);
      fieldSize{iField}=tmpSize;
      if tmpSize == nFramesBlackFly
@@ -53,4 +53,6 @@ if nFramesBlackFly<nFramesHamamatsu
         end
  end   
 end
+
+
 
