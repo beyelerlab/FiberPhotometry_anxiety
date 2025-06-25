@@ -21,7 +21,8 @@ end
 function Ca = processBulkSignal(sig,ref,frameRate_Hz,removeFirstMinute)
     Ca=[];
     %% If this has not been taken care off earlier, this has to be done to remove autobleaching period that corrupt analysis
-    if(removeFirstMinute), sig(1:20*60)=[];ref(1:20*60)=[];end
+    frameRate_Hz = floor(frameRate_Hz);
+    if(removeFirstMinute), sig(1:frameRate_Hz*60)=[];ref(1:frameRate_Hz*60)=[];end
     %% Processing Bulk Signal
     Ca.nFrames = size(ref,1);
     Ca.T = 1: Ca.nFrames;

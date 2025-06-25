@@ -3,8 +3,7 @@ function experiment = loadExpData_PB(p)
 %%  LOADING, SYNCHRONIZING AND CLEANING THE DATA
 vData = getVideoTrackingData(p);
 % vData.bg=getBackGroundSlow(p);
-pData = loadPhotometryData(p);
-
+[pData, p] = loadPhotometryData(p);
 
 % if ~isfield(vData.videoInfo,'FrameRate')
 %     vData.videoInfo=getVideoInfo(p);
@@ -22,9 +21,9 @@ end
 
 if (framerate ~= p.HamamatsuFrameRate_Hz)
     warning('Program could not work if behavioral camera and hamamatsu camera have different frame rates');
-    protectedFields = {'distance', 'videoInfo', 'nSamples0', 'num0', 't0'}
+    protectedFields = {'distance', 'videoInfo', 'nSamples0', 'num0', 't0'};
     vDataFields = fieldnames(vData);
-    vDataFields = setdiff(vDataFields,protectedFields)
+    vDataFields = setdiff(vDataFields,protectedFields);
     nDataFields = size(vDataFields,1);
     x = squeeze(vData.t0);
     xq = pData.t0/1000;
