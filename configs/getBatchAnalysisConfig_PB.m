@@ -5,10 +5,10 @@ switch batchID
     
     %% OFT SPECIFIC PARAMETERS
     case 'test_OFT'                
-        dataRoot{1} =  'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\GRAB\GRAB_DA\D2-cre\aIC\OFT\input_zscore';
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250528_LBN5\20250602_LBN5.2\20250606_OFT_LBN5.2\Analysis\Input';
         
         if isempty(outputFolder)
-            outputFolder = 'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\GRAB\GRAB_DA\D2-cre\aIC\OFT\output_zscore';
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250528_LBN5\20250602_LBN5.2\20250606_OFT_LBN5.2\Analysis\Output';
         end
         
         journalFolder =  outputFolder;
@@ -29,9 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250401_LBN4\20250401_EPM\EPM';
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250528_LBN5\20250602_LBN5.2\20250602_EPM_LBN5.2\Analysis\Input';
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250401_LBN4\20250401_EPM\EPM\Output' ;
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250528_LBN5\20250602_LBN5.2\20250602_EPM_LBN5.2\Analysis\Output' ;
         end
         
         journalFolder = outputFolder;
