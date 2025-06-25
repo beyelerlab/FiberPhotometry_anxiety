@@ -4,8 +4,8 @@ clear all; clc
 
 %   load('mamap.mat');
 
-path='C:\Users\agonzalez\Desktop\_Alba\pruebas analisis fotometria\EPM_aIC-BLA_allmice\Output\Input';
-outputpath='C:\Users\agonzalez\Desktop\_Alba\pruebas analisis fotometria\EPM_aIC-BLA_allmice\Output\Input';
+path='C:\Users\lpages\Desktop\all_pIC_Zscore_dff\EPM_Zscore\heat_maps_zscore\SD';
+outputpath='C:\Users\lpages\Desktop\all_pIC_Zscore_dff\EPM_Zscore\heat_maps_zscore\SD';
 
 dirOutput=dir(fullfile(path,'*.mat'));
 fileNames={dirOutput.name};
@@ -95,12 +95,12 @@ set(0,'defaultfigurecolor','w')
 
 x=apparatusDesign_cmSP.x/0.5;
 y=apparatusDesign_cmSP.y/0.5;
-x1=[x(2), x(1), x(12), x(11)];
-y1=[y(2), y(1), y(12), y(11)];
+x1=[x(2), x(1), x(4), x(3)];
+y1=[y(2), y(1), y(4), y(3)];
 plot(x1, y1, '--k', 'linewidth',1)
 hold on
-x2=[x(5), x(6), x(7), x(8)];
-y2=[y(5), y(6), y(7), y(8)];
+x2=[x(1), x(2), x(3), x(4)];
+y2=[y(1), y(2), y(3), y(4)];
 plot(x2, y2, '--k', 'linewidth',1)
 x3=[x(8), x(9), x(10), x(11)];
 y3=[y(8), y(9), y(10), y(11)];

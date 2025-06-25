@@ -1,0 +1,4 @@
+function videoTrackingData =  getFreezing(videoTrackingData, distanceThreshold, avg_window_fr)
+    videoTrackingData.raw_freezing = videoTrackingData.distanceSP > distanceThreshold;
+    videoTrackingData.freezing = movmean(videoTrackingData.raw_freezing, avg_window_fr, "omitnan");
+end

@@ -21,6 +21,14 @@ function experiment = eventBasedAnalysis_20250227_PB(experiment)
     [experiment.pData.bulkPETH.matrix,experiment.pData.transientsPETH.matrix] = getPSTHData(idx_synchro,bulkSignal,idx_transients,edges_msec,sfreq,nFrames);
     %experiment.pData.eventsPETH = experiment.pData.num0(idx_synchro);
     [r,c]=size(experiment.pData.bulkPETH.matrix);
+
+
+% 
+%     experiment.pData.bulkPETH.matrix = experiment.pData.bulkPETH.matrix(1, :);
+%     experiment.pData.transientsPETH.matrix = experiment.pData.transientsPETH.matrix(1, :);
+% r = 1;
+
+
     if r>1
         experiment.pData.bulkPETH.nanmean = nanmean(experiment.pData.bulkPETH.matrix);
         experiment.pData.bulkPETH.nanstd = nanstd(experiment.pData.bulkPETH.matrix);
@@ -241,7 +249,7 @@ function experiment = writeOutputFile(experiment, varNames)
         
         varSubNames = split(varName,'.');  
                 
-        filename = [p.batch_ouputFile(1:end-4) sprintf('-%s-eventAnlaysis_%s_%s.txt',event_name,varSubNames{3},varSubNames{4})];
+        filename = [p.batch_ouputFile(1:end-4) sprintf('-%s-eventAnalysis_%s_%s.txt',event_name,varSubNames{3},varSubNames{4})];
         
         fods(iVar) = fopen(filename,'a');
         

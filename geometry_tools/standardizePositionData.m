@@ -16,6 +16,9 @@ switch p.apparatus.type
     case 'OFT'
         vData.corners=getRectangularZone(p,'corners',orderSTR);
         apparatusDesign_cm=getOftDesign(p.apparatus);
+    case 'Fear'
+        vData.corners=getRectangularZone(p,'corners',orderSTR);
+        apparatusDesign_cm=getFearConditionningDesign(p.apparatus);
     case 'SI'
         vData.landmarksStr={'Arena Top Left','Arena Top Right','Arena Bottom Right','Arena Bottom Left','Object Center','Juvenile Center'};
         vData.landmarks=getLandmarks(p,vData.landmarksStr);
@@ -207,6 +210,10 @@ p.xMax = ceil(max(apparatusDesign_cmSP.x));
 p.yMax = ceil(max(apparatusDesign_cmSP.y));
 
 vData = getDistance_CmSP(vData);
+DistanceThreshold = 0.025;
+avgWindowFr = 20;
+vData = getFreezing(vData, DistanceThreshold, avgWindowFr);
+
 
 experiment.p = p;
 experiment.vData = vData;
