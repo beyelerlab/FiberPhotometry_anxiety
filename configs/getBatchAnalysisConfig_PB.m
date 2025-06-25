@@ -29,9 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-        dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\EPM_Zscore\input'
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250321_LBN3\20250304_LBN3.1\20240225_LBN3_1_EPM\Analysis\input';
         if isempty(outputFolder)
-            outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\EPM_Zscore\output_df'
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250321_LBN3\20250304_LBN3.1\20240225_LBN3_1_EPM\Analysis\output';
         end
         
         journalFolder = outputFolder;
@@ -52,7 +52,7 @@ switch batchID
         analysisParameters.map_linearization = 1;
 
         %To analyse arm entries or arm exits
-        analysisParameters.event_analysis = 1;
+        analysisParameters.event_analysis = 0;
                          
        
     %% Sucrose In OFT SPECIFIC PARAMETERS

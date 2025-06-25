@@ -29,8 +29,12 @@ function Ca = processBulkSignal(sig,ref,frameRate_Hz,removeFirstMinute)
     Ca.raw.sig = sig;
     Ca.raw.ref = ref;
 
-     % Lerner 2015, used in Beyeler lab since 20231027
-    Ca.ref_fit = fit_iso (Ca.raw.ref, Ca.raw.sig);
+    % Lerner 2015, used in Beyeler lab since 20231027
+    % Ca.ref_fit = fit_iso(Ca.raw.ref, Ca.raw.sig, 'without_constraints');
+    
+    % Lerner 2015 and contrained fit since 20250625
+    Ca.ref_fit = fit_iso(Ca.raw.ref, Ca.raw.sig, 'with_constraints');
+    
     Ca.dff = calculate_dff(Ca.ref_fit, Ca.raw.sig);
     
     [Ca.zscore, Ca.clean_zscore] = process_zscore(Ca.dff);
@@ -67,7 +71,7 @@ function [clean_zscore, zscore] = process_zscore(dff)
 
 end
 
-function fit_ = fit_iso(iso, physio)
+function fit_ = fit_iso(iso, physio, fit_mode)
         %% fit iso to fluo gcamp (fit sig1 to sig2)
         N=1; % polynomial coef for linear
         idx1 = find(isnan(iso)==1);
@@ -76,8 +80,24 @@ function fit_ = fit_iso(iso, physio)
         physio_tmp = physio;  
         iso_tmp(union(idx1,idx2))=[];
         physio_tmp(union(idx1,idx2))=[];
-        P = polyfit(iso_tmp, physio_tmp, N);
-        fit_ = iso*P(1)+P(2);
+
+        if strcmp(fit_mode, 'without_constraints')        
+            fit_coefs = polyfit(iso_tmp, physio_tmp, N);
+            fit_ = iso*fit_coefs(1)+fit_coefs(2);
+        end
+        if strcmp(fit_mode, 'with_constraints')        
+            [fit_coefs, gof] = fit(iso_tmp, physio_tmp, 'poly1', 'Lower', [0, -Inf], 'Upper', [Inf, Inf], 'Robust', 'LAR');
+            fit_ = iso*fit_coefs.p1+fit_coefs.p2;
+        end        
+% 
+%         figure()
+%         hold on
+%         plot(iso, 'm')
+%         plot(physio, 'b')
+%         plot(fit_, 'k')
+%         plot(fit_2, 'r')
+    
+        
 end
 
 function dff = calculate_dff(iso_fit, physio)

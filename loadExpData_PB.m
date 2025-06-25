@@ -22,6 +22,23 @@ end
 
 if (framerate ~= p.HamamatsuFrameRate_Hz)
     warning('Program could not work if behavioral camera and hamamatsu camera have different frame rates');
+    protectedFields = {'distance', 'videoInfo', 'nSamples0', 'num0', 't0'}
+    vDataFields = fieldnames(vData);
+    vDataFields = setdiff(vDataFields,protectedFields)
+    nDataFields = size(vDataFields,1);
+    x = squeeze(vData.t0);
+    xq = pData.t0/1000;
+    for i=1:nDataFields
+        curField = vDataFields{i}
+        v = getfield(vData, curField);
+        vq = interp1(x, v, xq);
+        vData = setfield(vData, curField, vq);       
+    end
+    vData = getDistance(vData);
+    vData.nSamples0 = size(xq,1);
+    vData.num0 = 1:vData.nSamples0;
+    vData.t0 = xq;
+    vData.videoInfo.FrameRate = p.HamamatsuFrameRate_Hz;
     if p.protectMe, pause; end
 end
 
