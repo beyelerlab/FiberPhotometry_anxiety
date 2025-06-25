@@ -45,16 +45,14 @@ xZ2(5)=xZ2(1);yZ2(5)=yZ2(1);
 zones(2).xV=xZ2;zones(2).yV=yZ2;
 zones(2).type = 'center';
 
-% 
+
 % figure()
 % hold on
 % set(gca,'Ydir','reverse')
 % axis equal
-% plot(x0,y0,'k:')
-% plot(xZ2,yZ2,'b');
-% plot(xZ1,yZ1,'r');
-
-
+% % plot(x0,y0,'k:')
+% % plot(xZ2,yZ2,'b');
+% % plot(xZ1,yZ1,'r');
 
 
 

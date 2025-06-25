@@ -1,4 +1,4 @@
-function output = loadPhotometryData(params_)
+function [output, params_] = loadPhotometryData(params_)
 % Load fiber-photometry DATA
 % first valueof sig and ref are systematically aberant; if we control
 % hamamatsu from Arduino, we always get one additional value due to
@@ -28,7 +28,14 @@ function output = loadPhotometryData(params_)
     output.ref = ref;
     output.nSamples = size(sig,1);
     output.num0 = 1: output.nSamples;
-    output.t0 = (1: output.nSamples) / (params_.HamamatsuFrameRate_Hz);
+    params_.system = 'FIP' 
+    if exist('ts') % it's an RWD system
+        output.t0 = ts 
+        params_.HamamatsuFrameRate_Hz = 1/(mean(diff(output.t0)))*1000;
+        params_.system = 'RWD'
+    else % it's a FIP system
+        output.t0 = (1: output.nSamples) / (params_.HamamatsuFrameRate_Hz);
+    end
 
 
 end

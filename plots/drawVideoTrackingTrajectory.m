@@ -5,8 +5,8 @@ suffix = 'trace';
 figureSubFolder = [params.figureFolder filesep suffix];
 if ~exist(figureSubFolder,'dir'),mkdir(figureSubFolder);end
 
-figName = [figureSubFolder filesep params.dataFileTag '-' suffix '.eps'];
-% figName = [figureSubFolder filesep params.dataFileTag '-' suffix '.jpeg'];
+% figName = [figureSubFolder filesep params.dataFileTag '-' suffix '.eps'];
+figName = [figureSubFolder filesep params.dataFileTag '-' suffix '.jpeg'];
 
 if ~exist(figName,'file') || params.forceRedrawing
 %     bg=getBackGroundQuick(params);
@@ -20,8 +20,8 @@ if ~exist(figName,'file') || params.forceRedrawing
     set(gca,'Ydir','reverse')
 %     sMax = max(size(bg));
 %     xlim([0 sMax]);ylim([0 sMax]);
-    print(f,figName,'-deps');
-%     print(f,figName,'-djpeg');
+    % print(f,figName,'-deps');
+    print(f,figName,'-djpeg');
     close(f);
 end
 end
