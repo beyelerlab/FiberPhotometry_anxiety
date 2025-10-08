@@ -1,6 +1,6 @@
 function [dataRoot,outputFolder,apparatus,videoExt,analysisParameters]=getBatchAnalysisConfig_PB(batchID,machine,analysisParameters,outputFolder)
 
-%% Thibault
+%% Thibault 2
 switch batchID
     
     %% OFT SPECIFIC PARAMETERS
