@@ -29,9 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250321_LBN3\20250321_LBN3.2\20250311_LBN3_2_EPM\Analysis\input';
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250401_LBN4\20250401_EPM\Debug';
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250321_LBN3\20250321_LBN3.2\20250311_LBN3_2_EPM\Analysis\output';
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250401_LBN4\20250401_EPM\Debug\output';
         end
         
         journalFolder = outputFolder;
