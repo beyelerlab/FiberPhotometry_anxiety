@@ -1,3 +1,5 @@
+%% 
+%% 
 
 
 % updated on March 8, 2022. Beyeler lab, INSERM.
@@ -19,11 +21,12 @@ tic;t0=toc;
 % for sucrose-quinine test - batchID='test_Sucrose-Quinine'
 % for foot shock test -  batchID='test_footshock'
 
-batchID='test_EPM';
+batchID='test_footshock';
 
 %select and open 'getBatchAnalysisConfig_PB'. make sure that 'Function' folder
 %is also under working directory. Read and follow the instructions before
 %coming back to this script and running it.
+
 
 %Once you 'run' this script, another window will popup asking the user to
 %mark the four corners of the open arm (for EPM test) or four corners of
@@ -131,7 +134,6 @@ for iFolder=1:nFolders
                 if experiment.p.spatial_analysis
                     experiment = eventBasedFreezingAnalysis_PB(experiment);
                 end
-
 
 
 

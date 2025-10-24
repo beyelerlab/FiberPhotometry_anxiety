@@ -67,7 +67,7 @@ p.eventBasedAnalysisMinMaxWindow_msec = [-5000 2000];
 % it uses indices, so we don't count the cut period used to remove
 % photobleaching when you start at 0, the removed part will not be included
 
-p.time_bins_sec = 0:300:1200;
+p.time_bins_sec = [0 780];
 
 
 % p.firstLickTh_msec = 10000;

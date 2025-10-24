@@ -1,11 +1,11 @@
 clear all; clc
-path=['C:\Users\lpages\Desktop\plot\SD_aIC'];
-outputpath=['C:\Users\lpages\Desktop\plot\SD_aIC'];
+path=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\20250502_all_pIC\FS_Zscore\plot\HFD'];
+outputpath=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\20250502_all_pIC\FS_Zscore\plot\HFD'];
 dirOutput=dir(fullfile(path,'*.mat'));
 fileNames={dirOutput.name};
 n=length(fileNames);
 sfreq=29; 
-SignalaroundLicking=nan(n,401);
+SignalaroundLicking=nan(n,402);
 timebin_msec=(-10000:50:10000);
 timebin_sec=timebin_msec./1000;
 animal_Tag=strings([1,n]);
@@ -24,34 +24,41 @@ for i=1:n
     if isfield(experiment.pData,'avgBulkSignalAroundFood')
         SignalaroundLicking(i,:) = experiment.pData.avgBulkSignalAroundFood;
     else
+% Vérifier si SignalaroundLicking est vide ou NaN
+disp('Dimensions de SignalaroundLicking :')
+disp(size(SignalaroundLicking))
 
-        % if isfield(experiment.pData.bulkPETH,'nanmean')
-        %     SignalaroundLicking(i,:)=experiment.pData.bulkPETH.nanmean;
-        % end
-
-        if isfield(experiment.vData.freezingPETH,'nanmean')
-            SignalaroundLicking(i,:)=experiment.vData.freezingPETH.nanmean;
+if all(isnan(SignalaroundLicking(:)))
+    disp('⚠️ ATTENTION : SignalaroundLicking est entièrement NaN (aucun signal trouvé).')
+else
+    disp('✅ SignalaroundLicking contient des valeurs non-NaN.')
+    disp(['Nombre total de points valides : ' num2str(sum(~isnan(SignalaroundLicking(:))))])
+end
+        if isfield(experiment.pData.bulkPETH,'nanmean')
+            SignalaroundLicking(i,:)=experiment.pData.bulkPETH.nanmean;
         end
 
-
+        % if isfield(experiment.vData.freezingPETH,'nanmean')
+        %     SignalaroundLicking(i,:)=experiment.vData.freezingPETH.nanmean;
+        % end
 
 
     end
 
  % % Prendre seulement le premier événement qui ne contient pas de NaN
- %    if isfield(experiment.pData, 'avgBulkSignalAroundFood')
- %        SignalaroundLicking(i,:) = experiment.pData.avgBulkSignalAroundFood;
- %    elseif isfield(experiment.pData.bulkPETH, 'matrix') && size(experiment.pData.bulkPETH.matrix, 1) >= 1
- %        SignalaroundLicking(i,:) = experiment.pData.bulkPETH.matrix(1,:);
- %    end
- % 
- %    % Vérifier si le signal ne contient pas de NaN avant de le tracer
- %    if all(~isnan(SignalaroundLicking(i,:)))  % Vérifie qu'il n'y a pas de NaN dans le signal
- %        % Tracer le signal seulement si ce n'est pas NaN
- %        plot(timebin_sec, SignalaroundLicking(i,:), 'Color', color, 'LineWidth', 1.5);
- %        hold on;
- %    end
- % 
+    if isfield(experiment.pData, 'avgBulkSignalAroundFood')
+        SignalaroundLicking(i,:) = experiment.pData.avgBulkSignalAroundFood;
+    elseif isfield(experiment.pData.bulkPETH, 'matrix') && size(experiment.pData.bulkPETH.matrix, 1) >= 1
+        SignalaroundLicking(i,:) = experiment.pData.bulkPETH.matrix(1,:);
+    end
+
+    % Vérifier si le signal ne contient pas de NaN avant de le tracer
+    if all(~isnan(SignalaroundLicking(i,:)))  % Vérifie qu'il n'y a pas de NaN dans le signal
+        % Tracer le signal seulement si ce n'est pas NaN
+        plot(timebin_sec, SignalaroundLicking(i,:), 'Color', color, 'LineWidth', 1.5);
+        hold on;
+    end
+
     % Découper les différentes phases
     signal_tmp(1,:) = SignalaroundLicking(i,:);
     Before_bite(i,:) = signal_tmp(1:2*sfreq);
@@ -79,7 +86,7 @@ shadedErrorBar(timebin_sec, signal_mean, signal_sem, 'lineprops', {'Color', colo
 ylabel('\Delta F/F (%)', 'Interpreter', 'tex');
 xlabel('Time (s)');
 xticks([-10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0 1 2 3 4 5 ]);
-ylim([-1 4]);
+ylim([-0.5 0.5]);
 title('Signal moyen autour du premier événement');
 
 % Sauvegarde
@@ -100,7 +107,7 @@ close(gcf);
 
 
 
-
+% 
 % sem = nanstd(SignalaroundLicking) / sqrt(size(SignalaroundLicking,1));
 % plot(timebin_sec, SignalaroundLicking(1,:), 'Color', [143 40 140]./255, 'LineWidth', 1.5); % ploter le sig sur le premier event
 % % Affichage avec l'erreur standard
@@ -114,10 +121,10 @@ close(gcf);
 % filename = fullfile(outputpath,'Bite');
 % print(filename,'-dpdf','-painters','-r1200');
 % close(figure(1))
-
-
-
-    
+% 
+% 
+% 
+% 
 %     if isfield(experiment.pData,'avgBulkSignalAroundFood')
 %         SignalaroundLicking(i,:) = experiment.pData.avgBulkSignalAroundFood;
 %     else
@@ -158,4 +165,4 @@ close(gcf);
 % 
 % 
 % 
-% 
+

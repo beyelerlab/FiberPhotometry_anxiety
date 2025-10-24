@@ -4,8 +4,8 @@ clear all; clc
 
 %   load('mamap.mat');
 
-path='C:\Users\lpages\Desktop\all_pIC_Zscore_dff\EPM_Zscore\heat_maps_zscore\SD';
-outputpath='C:\Users\lpages\Desktop\all_pIC_Zscore_dff\EPM_Zscore\heat_maps_zscore\SD';
+path='S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_NAc\dff_Analysis\20250203_aIC_NAc_GCaMP_HFD_B2\20250204_EPM\Analysis\output\plot_EPM\SD';
+outputpath='S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_NAc\dff_Analysis\20250203_aIC_NAc_GCaMP_HFD_B2\20250204_EPM\Analysis\output\plot_EPM\SD';
 
 dirOutput=dir(fullfile(path,'*.mat'));
 fileNames={dirOutput.name};
@@ -90,7 +90,7 @@ hBar=colorbar('horiz');
 box off
 caxis([-1,1])
 set(get(hBar,'title'),'string','\Delta F/F (%)','Fontname', 'Arial', 'Fontsize', 10)
-set(hBar, 'Position', [0.624 0.046 0.2 0.02], 'YTickLabel', {'-1','0','1'},'Fontname', 'Arial', 'Fontsize', 10);
+%set(hBar, 'Position', [0.624 0.046 0.2 0.02], 'YTickLabel', {'-1','0','3'},'Fontname', 'Arial', 'Fontsize', 10);
 set(0,'defaultfigurecolor','w')
 
 x=apparatusDesign_cmSP.x/0.5;

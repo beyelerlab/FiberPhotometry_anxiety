@@ -40,7 +40,7 @@ function Ca = processBulkSignal(sig,ref,frameRate_Hz,removeFirstMinute)
     
     [Ca.zscore, Ca.clean_zscore] = process_zscore(Ca.dff);
     
-    Ca.mainSig = Ca.zscore; 
+    Ca.mainSig = Ca.dff; 
 
 end
 
