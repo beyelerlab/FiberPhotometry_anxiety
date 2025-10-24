@@ -3,7 +3,8 @@ vData = experiment.vData;
 p=experiment.p;
 switch p.apparatus.type
     case 'EPM'
-         vData.zones_cmSP=epmDesing2Zones(experiment.apparatusDesign_cmSP);    
+         vData.zones_cmSP=epmDesing2Zones(experiment.apparatusDesign_cmSP);   
+
      case 'NSFT'
          vData.zones_cmSP=oftDesing2Zones(experiment.apparatusDesign_cmSP,p.apparatusCenterZoneSize_propOfTotalArea);    
      case 'HOMECAGE-FD'

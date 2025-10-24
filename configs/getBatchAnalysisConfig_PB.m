@@ -29,9 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_BLA\Analysis_all_aIC_BLA\EPM_Zscore\input';
+        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\all_pIC_Zscore_dff\EPM_Zscore\input_debug';
         if isempty(outputFolder)
-            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_BLA\Analysis_all_aIC_BLA\EPM_Zscore\output';
+            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\all_pIC_Zscore_dff\EPM_Zscore\output_debug';
 
         end
         
@@ -47,7 +47,7 @@ switch batchID
         apparatus{1}.CA_cm = 75; % Closed Arms Envergure
         apparatus{1}.W_cm = 5.3;     % Arms Width
         
-        videoExt{1}='avi';
+        videoExt{1}='mp4';
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 1;

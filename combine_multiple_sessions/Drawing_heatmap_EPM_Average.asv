@@ -51,6 +51,21 @@ plot_heatmap(map, occ_map, xMax, yMax, apparatusDesign_cmSP, filename, experimen
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function plot_heatmap(map, occ_map, xMax, yMax, apparatusDesign_cmSP, filename, experiment)
 
 
@@ -104,8 +119,8 @@ for iZ=1:size(idx_ordered,2)
     x = zones_(idx_ordered(iZ)).xV/0.5;
     y = zones_(idx_ordered(iZ)).yV/0.5;
     x = [x x(1)];
-    y = [y y(1)];
-    plot(x,y, linedef, 'linewidth',1)
+    x = [y x(1)];
+    plot(zones_(idx_ordered(iZ)).xV/0.5, zones_(idx_ordered(iZ)).yV/0.5, linedef, 'linewidth',1)
     hold on
 end
 
