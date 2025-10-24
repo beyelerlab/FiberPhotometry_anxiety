@@ -110,7 +110,7 @@ for iFolder=1:nFolders
 
             experiment = getZonesStatistics_PB(experiment);
 
-            experiment = getZonesStatistics_TimeBins_PB(experiment);
+%             experiment = getZonesStatistics_TimeBins_PB(experiment);
             
             if experiment.p.map_linearization                              
                 % for test you can use the test-block #1 located at the end of this file

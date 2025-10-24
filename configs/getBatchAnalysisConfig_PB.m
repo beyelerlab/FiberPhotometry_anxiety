@@ -1,6 +1,6 @@
 function [dataRoot,outputFolder,apparatus,videoExt,analysisParameters]=getBatchAnalysisConfig_PB(batchID,machine,analysisParameters,outputFolder)
 
-
+%% Thibault 3
 switch batchID
     
     %% OFT SPECIFIC PARAMETERS
@@ -32,6 +32,7 @@ switch batchID
         dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_BLA\Analysis_all_aIC_BLA\EPM_Zscore\input';
         if isempty(outputFolder)
             outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_BLA\Analysis_all_aIC_BLA\EPM_Zscore\output';
+
         end
         
         journalFolder = outputFolder;

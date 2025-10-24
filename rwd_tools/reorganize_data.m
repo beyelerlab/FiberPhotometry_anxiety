@@ -1,7 +1,7 @@
 clc; clear; close all
 
 % fip = "E:\NAS_SD\SuiviClient\Beyeler\DATA\20230502_NSFT\Inputs\F2434.mat"
-data_root = 'C:\Users\zaman\Desktop\TMP'
+data_root = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250731_Carolina_Test batch2_signal check'
 
 subdir_list = dir([data_root filesep '*'])
 n_subdir = size(subdir_list, 1);
@@ -37,6 +37,7 @@ for i=3:n_subdir
                  fid = fopen(fluo_path);
                  params = fgetl(fid);
                  columns = fgetl(fid);
+                 %% ici on sait si ca finit par une virgule
                  fclose(fid);
                  
 %                  fod = fopen([data_root filesep sprintf('%s_photoparams.txt', mouse)],'w');
@@ -62,10 +63,10 @@ for i=3:n_subdir
                     ts = sig(1,:);
                     sig([1,2,5],:) = [];
                  catch
-                     sig = readtable(fluo_path);                                          
+                     sig = readtable(fluo_path);                      
                      ts = table2array(sig(:,1));
-                     sig(:, [1,2]) = [];
-                     sig=table2array(sig);
+                     sig(:, [1,2,5]) = [];
+                     sig = table2array(sig); 
                      sig = sig';
                  end
 
