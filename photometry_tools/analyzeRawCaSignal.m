@@ -46,8 +46,8 @@ end
 
 function [clean_zscore, zscore] = process_zscore(dff)
 
-    mean_bl = nanmean(dff);
-    std_bl = nanstd(dff);
+    mean_bl = mean(dff, 'omitnan');
+    std_bl = std(dff, 'omitnan');
     zscore = (dff - mean_bl) ./std_bl;
     clean_zscore = zscore;
     
@@ -65,8 +65,8 @@ function [clean_zscore, zscore] = process_zscore(dff)
             i2 = min([i2 nSamples]);
             dff_clean(i1:i2)= nan(1,i2-i1+1);
         end
-        mean_bl = nanmean(dff_clean);
-        std_bl = nanstd(dff_clean);
+        mean_bl = mean(dff_clean, 'omitnan');
+        std_bl = std(dff_clean, 'omitnan');
         clean_zscore = (dff - mean_bl) / std_bl;
     end
 

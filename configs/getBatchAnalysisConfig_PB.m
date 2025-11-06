@@ -5,10 +5,10 @@ switch batchID
     
     %% OFT SPECIFIC PARAMETERS
     case 'test_OFT'                
-        dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\OFT_Zscore\input';
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250926_OFT';
         
         if isempty(outputFolder)
-            outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\OFT_Zscore\output';
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250926_OFT\Analysis\Output';
         end
         
         journalFolder =  outputFolder;
@@ -29,9 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250401_LBN4\20250401_EPM\Debug';
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250923_EPM';
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250401_LBN4\20250401_EPM\Debug\output';
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250923_EPM\Analysis\Output';
         end
         
         journalFolder = outputFolder;
@@ -132,9 +132,9 @@ switch batchID
     case 'test_NSFT'
 
         % % % % %% RIM
-        dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\input_Rim';
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT';
         if isempty(outputFolder)
-            outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\output_Rim' ;
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT\Analysis\Output' ;
         end
         % 
         % % Victor

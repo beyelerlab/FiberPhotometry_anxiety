@@ -1,7 +1,7 @@
 clc; clear; close all
 
 % fip = "E:\NAS_SD\SuiviClient\Beyeler\DATA\20230502_NSFT\Inputs\F2434.mat"
-data_root = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250731_Carolina_Test batch2_signal check'
+data_root = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT'
 
 subdir_list = dir([data_root filesep '*'])
 n_subdir = size(subdir_list, 1);
@@ -61,11 +61,11 @@ for i=3:n_subdir
                     sig = readmatrix(fluo_path); 
                     sig = sig';
                     ts = sig(1,:);
-                    sig([1,2,5],:) = [];
+                    sig([1,2],:) = [];
                  catch
                      sig = readtable(fluo_path);                      
-                     ts = table2array(sig(:,1));
-                     sig(:, [1,2,5]) = [];
+                     ts = table2array(sig(:,2));
+                     sig(:, [1,2]) = [];
                      sig = table2array(sig); 
                      sig = sig';
                  end

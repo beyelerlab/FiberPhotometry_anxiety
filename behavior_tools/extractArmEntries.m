@@ -13,9 +13,8 @@ end
 % To avoid  conting zone_0 entrances we remove them
 % using the prev. pos of the animal
 
-n = size(z);
-for i=1:n
-    
+n = size(z,1);
+for i=1:n    
     if ~z(i)
         if i>1, z(i) = z(i-1);end
     end
