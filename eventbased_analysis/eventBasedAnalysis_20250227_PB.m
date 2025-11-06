@@ -323,7 +323,3 @@ function close_all_files(fods)
         fclose(fods(i));
     end
 end
-
-
-
-
