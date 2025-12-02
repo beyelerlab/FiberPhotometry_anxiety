@@ -1,6 +1,6 @@
-  clear all; clc
-  path=['C:\Users\lpages\Desktop\20241118_NSFT\output_dff\PLOT_with_victor_mice_old_dff\SD'];
-  outputpath=['C:\Users\lpages\Desktop\20241118_NSFT\output_dff\PLOT_with_victor_mice_old_dff\SD'];
+ clear all; clc
+  path=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_NAc\NSFT_Zscore\output\heatmaps\HFD'];
+  outputpath=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_NAc\NSFT_Zscore\output\heatmaps\HFD'];
   dirOutput=dir(fullfile(path,'*.mat'));
   fileNames={dirOutput.name};
   n=length(fileNames); 
@@ -55,4 +55,4 @@
     print(filename,'-djpeg','-painters','-r1200');
     %close(figure(1))
   %  print(f,figName,'-djpeg');
-    %close(f);
+    %close(f)

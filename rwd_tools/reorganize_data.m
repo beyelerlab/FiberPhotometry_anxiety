@@ -1,7 +1,11 @@
 clc; clear; close all
 
 % fip = "E:\NAS_SD\SuiviClient\Beyeler\DATA\20230502_NSFT\Inputs\F2434.mat"
+<<<<<<< Updated upstream
 data_root = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT'
+=======
+data_root = 'S:\_Lea\1.Data\20251125_aIC-aIC_aIC-LHr\20251124_sig_check'
+>>>>>>> Stashed changes
 
 subdir_list = dir([data_root filesep '*'])
 n_subdir = size(subdir_list, 1);

@@ -1,7 +1,7 @@
 clc; clear; close all
 
 % fip = "E:\NAS_SD\SuiviClient\Beyeler\DATA\20230502_NSFT\Inputs\F2434.mat"
-data_root = 'S:\_Lea\1.Data\20251007_aIC_BLA_B3\20251016_FS\FS_aIC_BLA_B3\FS'
+data_root = 'S:\_Lea\1.Data\20251125_aIC-aIC_aIC-LHr\20251124_sig_check'
 
 subdir_list = dir([data_root filesep '*'])
 n_subdir = size(subdir_list, 1);
@@ -73,19 +73,19 @@ for i=3:n_subdir
                  end
 
 
-                 % file_list =  dir([folder2 filesep '*.*']);
-                 % n_file = size(file_list, 1);
-                 % 
-                 % for k=3:n_file                     
-                 %     n = file_list(k).name;
-                 %     source = [folder2 filesep n];
-                 %     if strcmp(n,'Video.mp4')
-                 %         dest = [data_root filesep sprintf('%s.mp4', mouse)];
-                 %     else
-                 %         dest = [data_root filesep sprintf('%s_%s', mouse, n)];
-                 %     end                     
-                 %     [status,msg,msgID] = copyfile(source, dest);                     
-                 % end
+                 file_list =  dir([folder2 filesep '*.*']);
+                 n_file = size(file_list, 1);
+
+                 for k=3:n_file                     
+                     n = file_list(k).name;
+                     source = [folder2 filesep n];
+                     if strcmp(n,'Video.mp4')
+                         dest = [data_root filesep sprintf('%s.mp4', mouse)];
+                     else
+                         dest = [data_root filesep sprintf('%s_%s', mouse, n)];
+                     end                     
+                     [status,msg,msgID] = copyfile(source, dest);                     
+                 end
                  
              end             
         end        

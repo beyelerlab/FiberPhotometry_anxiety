@@ -13,10 +13,14 @@ vData = getVideoTrackingData(p);
 % end
 
 
-if ~isfield(vData.videoInfo,'FrameRate')
-    framerate = 20;
+if exist([p.dataRoot filesep sprintf('%s-fr.txt',p.dataFileTag)],'file')
+    framerate = load([p.dataRoot filesep sprintf('%s-fr.txt',p.dataFileTag)]);
 else
-    framerate = vData.videoInfo.FrameRate;
+    if ~isfield(vData.videoInfo,'FrameRate')
+        framerate = 20;
+    else
+        framerate = vData.videoInfo.FrameRate;
+    end
 end
 
 if (framerate ~= p.HamamatsuFrameRate_Hz)
@@ -25,11 +29,13 @@ if (framerate ~= p.HamamatsuFrameRate_Hz)
     vDataFields = fieldnames(vData);
     vDataFields = setdiff(vDataFields,protectedFields);
     nDataFields = size(vDataFields,1);
-    x = squeeze(vData.t0);
-    xq = pData.t0/1000;
+    nFrames = size(vData.t0,1);
+    x = 1:nFrames;
+    x = x/framerate;
+    xq = pData.t0;
     for i=1:nDataFields
         curField = vDataFields{i}
-        v = getfield(vData, curField);
+        v = getfield(vData, curField);             
         vq = interp1(x, v, xq);
         [r,c] = size(vq);
         if (r<c), vq = vq';end
@@ -181,3 +187,4 @@ experiment.vData=vData;
 experiment.pData=pData;
 
 end
+

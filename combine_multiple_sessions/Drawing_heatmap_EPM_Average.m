@@ -4,8 +4,8 @@ clear all; clc
 
 %   load('mamap.mat');
 
-path='S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\all_pIC_Zscore_dff\EPM_Zscore\heat_maps_debug';
-outputpath='S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\all_pIC_Zscore_dff\EPM_Zscore\heat_maps_debug';
+path='S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\EPM_Zscore\output2\good_heatmaps\SD';
+outputpath='S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\EPM_Zscore\output2\good_heatmaps\SD';
 
 dirOutput=dir(fullfile(path,'*.mat'));
 fileNames={dirOutput.name};
@@ -24,7 +24,11 @@ for i=1:n
     gaussFilt_PercAvgSigMap = imgaussfilt(experiment.map.NormSig.IO,2);
     gaussFilt_PercAvgSigMap(ii)=nan;
     % gaussFilt_PercAvgSigMap=gaussFilt_PercAvgSigMap./max(gaussFilt_PercAvgSigMap(:));
-    map(:,:,i)=gaussFilt_PercAvgSigMap;
+    % map(:,:,i)=gaussFilt_PercAvgSigMap;
+
+    map(:,:,i)=experiment.map.NormSig.IO;
+
+
     occ_map(:,:,i)=experiment.map.Occ.IO;
     
     xMax=experiment.p.xMax/0.5;
@@ -33,7 +37,7 @@ for i=1:n
     
     filename = [outputpath filesep 'Heatmap_' experiment.p.dataFileTag];
 
-    plot_heatmap(gaussFilt_PercAvgSigMap, experiment.map.Occ.IO, xMax, yMax, apparatusDesign_cmSP, filename, experiment)  
+    % plot_heatmap(gaussFilt_PercAvgSigMap, experiment.map.Occ.IO, xMax, yMax, apparatusDesign_cmSP, filename, experiment)  
     
 end
 

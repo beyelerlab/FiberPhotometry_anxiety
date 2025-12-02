@@ -1,2 +1,2 @@
-Some work need to be done in loadExpData because the real start of the behavior
-github test from matlab
+Pour les heatmaps, on a retirer le filtre gaussien lors de la creation d'une carte pour une souris, il faudrait le faire après avoir moyenner toutes les souris.
+=> il faudrait ajouter un flag pour le faire ou ne pas le faire.
