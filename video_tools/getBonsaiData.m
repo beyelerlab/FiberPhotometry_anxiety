@@ -48,9 +48,10 @@ if exist(bonsaiPath,'file')
     end
     
     
-    figure();
-    hold on
-    plot(bonsai_output.optoPeriod);
+    % figure();
+    % hold on
+    % plot(bonsai_output.optoPeriod);
+
     
     
 end

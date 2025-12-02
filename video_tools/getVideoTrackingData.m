@@ -18,8 +18,16 @@ if ~exist(bonsaiClean,'file') || params.forceGetBodyParts
         f=figure();
     end
     
-    
-    bonsaiPath=[params.dataRoot filesep params.dataFileTag '-bonsai.txt'];
+
+    % To anlayse old FS setup, when shock appears at the end of the LED
+    % presentation
+    bonsaiPath=[params.dataRoot filesep params.dataFileTag '-bonsaiShifted.txt'];
+    if ~exist(bonsaiPath,'file')
+        bonsaiPath=[params.dataRoot filesep params.dataFileTag '-bonsai.txt'];
+    end
+
+
+
     if exist(bonsaiPath,'file')
         bonsai_output = getBonsaiData(bonsaiPath);
     else
@@ -28,6 +36,8 @@ if ~exist(bonsaiClean,'file') || params.forceGetBodyParts
             bonsai_output = getBonsaiData(bonsaiPath);
         end
     end
+
+
     nSamples = size(bonsai_output.bodyX,1);
     flipNeeded = 0;
     

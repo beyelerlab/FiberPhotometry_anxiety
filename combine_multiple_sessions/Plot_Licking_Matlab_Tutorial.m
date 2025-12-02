@@ -1,11 +1,11 @@
 clear all; clc
-path=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\20250502_all_pIC\FS_Zscore\plot\HFD'];
-outputpath=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\20250502_all_pIC\FS_Zscore\plot\HFD'];
+path=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\plot\HFD'];
+outputpath=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\plot\HFD'];
 dirOutput=dir(fullfile(path,'*.mat'));
 fileNames={dirOutput.name};
 n=length(fileNames);
 sfreq=29; 
-SignalaroundLicking=nan(n,402);
+SignalaroundLicking=nan(n,401);
 timebin_msec=(-10000:50:10000);
 timebin_sec=timebin_msec./1000;
 animal_Tag=strings([1,n]);

@@ -5,24 +5,10 @@ switch batchID
     
     %% OFT SPECIFIC PARAMETERS
     case 'test_OFT'                
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250926_OFT';
-        
+
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250926_OFT';       
         if isempty(outputFolder)
             outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250926_OFT\Analysis\Output';
-=======
-        dataRoot{1} =  'C:\Users\lpages\Desktop\20241118_NSFT\test_script_OFT\input';
-        
-        if isempty(outputFolder)
-            outputFolder = 'C:\Users\lpages\Desktop\20241118_NSFT\test_script_OFT\output';
->>>>>>> 607c9eccc34d93496cd1c84596ac8a20e3828edb
-=======
-        dataRoot{1} =  'S:\_Lea\1.Data\20251125_aIC-aIC_aIC-LHr\20251126_OFT\Analysis\input';
-        
-        if isempty(outputFolder)
-            outputFolder = 'S:\_Lea\1.Data\20251125_aIC-aIC_aIC-LHr\20251126_OFT\Analysis\output';
->>>>>>> Stashed changes
         end
         
         journalFolder =  outputFolder;
@@ -43,20 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-<<<<<<< Updated upstream
-<<<<<<< HEAD
         dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250923_EPM';
         if isempty(outputFolder)
             outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250923_EPM\Analysis\Output';
-=======
-        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\all_pIC_Zscore_dff\EPM_Zscore\input_debug';
-=======
-        dataRoot{1} =  'S:\_Lea\1.Data\20251125_aIC-aIC_aIC-LHr\20251125_EPM\Analysis\input';
->>>>>>> Stashed changes
-        if isempty(outputFolder)
-            outputFolder = 'S:\_Lea\1.Data\20251125_aIC-aIC_aIC-LHr\20251125_EPM\Analysis\output';
-
->>>>>>> 607c9eccc34d93496cd1c84596ac8a20e3828edb
         end
         
         journalFolder = outputFolder;
@@ -130,16 +105,9 @@ switch batchID
         
         %% fOOTSHOCK SPECIFIC PARAMETERS    
     case 'test_footshock'
-
-<<<<<<< Updated upstream
         dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\input';
         if isempty(outputFolder)
             outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\output' ;
-=======
-        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\20250408_all_aIC\FS_Zscore\input';
-        if isempty(outputFolder)
-            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\20250408_all_aIC\FS_Zscore\output' ;
->>>>>>> Stashed changes
         end
         journalFolder = outputFolder;
                
@@ -155,59 +123,18 @@ switch batchID
         
         videoExt{1}='mp4';   
                 
-        analysisParameters.spatial_analysis = 1;
+        analysisParameters.spatial_analysis = 0;
         analysisParameters.map_linearization = 0;
         analysisParameters.event_analysis = 1;         
         
     %% TailSuspension SPECIFIC PARAMETERS    
     case 'test_NSFT'
 
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-        % % % % %% RIM
         dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT';
         if isempty(outputFolder)
             outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT\Analysis\Output' ;
         end
-        % 
-=======
-        % % % % % %% RIM
-        % dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\input_Rim';
-        % if isempty(outputFolder)
-        %     outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\output_Rim' ;
-        % end
-        % % 
->>>>>>> 607c9eccc34d93496cd1c84596ac8a20e3828edb
-        % % Victor
-        % dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analaysis_of_victor_mice\input_mice_victor';
-        % if isempty(outputFolder)
-        %     outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analaysis_of_victor_mice\output_mice_victor' ;
-        % end
 
-        % % % % %% Lea 1
-        % dataRoot{1} =  'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20240531_NSFT_photoM_B2_LP\input_one_bite';
-        % if isempty(outputFolder)
-        %     outputFolder = 'C:\Users\lpages\Desktop\analysis_all_aIC\20250429_all_analysis_aIC_pIC_NSFT\20240531_NSFT_photoM_B2_LP\output_one_bite';
-        % end
-=======
-        % % % % % % % %% RIM
-        % % dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\20250408_all_aIC\NSFT_Zscore\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\input_Rim';
-        % % if isempty(outputFolder)
-        % %     outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\Batch_aIC_pIC_LP\20250408_all_aIC\NSFT_Zscore\20250429_all_analysis_aIC_pIC_NSFT\20250411_Analysis_of_rim_mice\output_Rim';
-        % % end
-        % % % 
-        % % % Victor
-        % dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_BLA\Analysis_all_aIC_BLA\NSFT_Zscore\Inputs';
-        % if isempty(outputFolder)
-        %     outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_BLA\Analysis_all_aIC_BLA\NSFT_Zscore\Outputs' ;
-        % end
-
-        % % % % %% Lea 1
-        dataRoot{1} =  'C:\Users\lpages\Desktop\NSFT_Zscore\input';
-        if isempty(outputFolder)
-            outputFolder = 'C:\Users\lpages\Desktop\NSFT_Zscore\output';
-        end
->>>>>>> Stashed changes
         journalFolder = outputFolder;
                
         analysisParameters.apparatusNormalizationRequested = 0;
@@ -236,10 +163,8 @@ switch batchID
 
         
         dataRoot{1} =  'E:\NAS_SD\SuiviClient\Beyeler\DATA\TestTransientDetection\Inputs';
-%                 dataRoot{1} =  'E:\NAS_SD\SuiviClient\Beyeler\DATA\Alba\ThreeChambers\Inputs';
         if isempty(outputFolder)
             outputFolder = 'E:\NAS_SD\SuiviClient\Beyeler\DATA\TestTransientDetection\Outputs' ;
-%                         outputFolder = 'E:\NAS_SD\SuiviClient\Beyeler\DATA\Alba\ThreeChambers\Outputs' ;
         end
         journalFolder = outputFolder;
                

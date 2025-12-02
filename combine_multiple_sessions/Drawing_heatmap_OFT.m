@@ -11,13 +11,22 @@
       
    tmp_file=char(fileNames(i));
    tmp_path=[path filesep tmp_file];
+
    load(tmp_path)
-   ii = isnan(experiment.map.NormSig.IO);
-   experiment.map.NormSig.IO(ii)=0;
-   gaussFilt_PercAvgSigMap = imgaussfilt(experiment.map.NormSig.IO,experiment.p.PhotometrySignalMap_sigmaGaussFilt);
-   gaussFilt_PercAvgSigMap(ii)=nan;
-   gaussFilt_PercAvgSigMap=gaussFilt_PercAvgSigMap./max(gaussFilt_PercAvgSigMap(:));
-   map(:,:,i)=gaussFilt_PercAvgSigMap;
+
+   PercAvgSigMap = experiment.map.NormSig.IO;
+
+   if experiment.p.PhotometrySignalMap_sigmaGaussFilt
+       ii = isnan(experiment.map.NormSig.IO);
+       experiment.map.NormSig.IO(ii)=0;
+       gaussFilt_PercAvgSigMap = imgaussfilt(experiment.map.NormSig.IO,experiment.p.PhotometrySignalMap_sigmaGaussFilt);
+       gaussFilt_PercAvgSigMap(ii)=nan;
+       gaussFilt_PercAvgSigMap=gaussFilt_PercAvgSigMap./max(gaussFilt_PercAvgSigMap(:));   
+       PercAvgSigMap = gaussFilt_PercAvgSigMap;
+   end
+
+
+   map(:,:,i)=PercAvgSigMap;
         
   end 
     map=nanmean(map, 3);

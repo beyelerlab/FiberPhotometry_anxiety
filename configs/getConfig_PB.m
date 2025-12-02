@@ -36,11 +36,13 @@ p.getVideoTrackingData_plot=0;
 p.getVideoTrackingData_force=0;
 p.forceGetBodyParts=0;
 
-p.OccupancyMap_sigmaGaussFilt=1;
-p.PhotometrySignalMap_sigmaGaussFilt=1;
+% !!!
+p.OccupancyMap_sigmaGaussFilt=0; % if =0, no gaussian filtering
+p.PhotometrySignalMap_sigmaGaussFilt=0; % if =0, no gaussian filtering
 
 p.OccupancyMap_sigmaGaussFilt=6;
 p.PhotometrySignalMap_sigmaGaussFilt=6;
+
 
 % p.deltaFF_slidingWindowWidth = 1200;
 
@@ -52,7 +54,7 @@ p.bonzaiDone = 1;
 p.eventBasedAnalysisEdges_msec = [-10000:50:10000]; 
 p.minimum_gap_between_events_msec = 1000;
 p.keep_first_and_last_events_only = 0;
-p.eventBasedAnalysisBaselineWindow_msec = [-5000 -3000];
+p.eventBasedAnalysisBaselineWindow_msec = [-3000 0];
 p.eventBasedAnalysisMinMaxWindow_msec = [-5000 2000];
 
 % If you would like to divide the analysis in sub time periods you could
@@ -67,7 +69,7 @@ p.eventBasedAnalysisMinMaxWindow_msec = [-5000 2000];
 % it uses indices, so we don't count the cut period used to remove
 % photobleaching when you start at 0, the removed part will not be included
 
-p.time_bins_sec = [0 1260];
+p.time_bins_sec = [0 60*13];
 
 
 % p.firstLickTh_msec = 10000;
