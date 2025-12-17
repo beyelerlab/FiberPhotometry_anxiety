@@ -6,9 +6,9 @@ switch batchID
     %% OFT SPECIFIC PARAMETERS
     case 'test_OFT'                
 
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250926_OFT';       
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250321_LBN3\20250321_LBN3.2\20250314_LBN3_2_OFT';       
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250926_OFT\Analysis\Output';
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250321_LBN3\20250321_LBN3.2\20250314_LBN3_2_OFT\Analysis\output';
         end
         
         journalFolder =  outputFolder;
