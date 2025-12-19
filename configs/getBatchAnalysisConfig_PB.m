@@ -6,9 +6,9 @@ switch batchID
     %% OFT SPECIFIC PARAMETERS
     case 'test_OFT'                
 
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250321_LBN3\20250321_LBN3.2\20250314_LBN3_2_OFT';       
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250528_LBN5\20250528_LBN5.1\20250523_OFT_LBN5.1';       
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250321_LBN3\20250321_LBN3.2\20250314_LBN3_2_OFT\Analysis\output';
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250528_LBN5\20250528_LBN5.1\20250523_OFT_LBN5.1\Analysis\output';
         end
         
         journalFolder =  outputFolder;
@@ -21,7 +21,7 @@ switch batchID
         apparatus{1}.Model='Yifan';
         apparatus{1}.side_cm = 60; % Open Arms Envergure                
         
-        videoExt{1}='mp4';
+        videoExt{1}='avi';
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 0;
