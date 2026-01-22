@@ -6,9 +6,9 @@ switch batchID
     %% OFT SPECIFIC PARAMETERS
     case 'test_OFT'                
 
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250528_LBN5\20250528_LBN5.1\20250523_OFT_LBN5.1';       
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20260119_Carolina\SI-FiberAdult\OFT_SI-FiberAdult';       
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250528_LBN5\20250528_LBN5.1\20250523_OFT_LBN5.1\Analysis\output';
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20260119_Carolina\SI-FiberAdult\OFT_SI-FiberAdult\Analysis';
         end
         
         journalFolder =  outputFolder;
@@ -21,7 +21,7 @@ switch batchID
         apparatus{1}.Model='Yifan';
         apparatus{1}.side_cm = 60; % Open Arms Envergure                
         
-        videoExt{1}='avi';
+        videoExt{1}='mp4';
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 0;
@@ -132,7 +132,7 @@ switch batchID
 
         dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT';
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT\Analysis\Output' ;
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT\Analysis' ;
         end
 
         journalFolder = outputFolder;
@@ -152,8 +152,8 @@ switch batchID
         analysisParameters.map_linearization = 0;
         analysisParameters.event_analysis = 1; 
         
-        analysisParameters.extract_bites_from_audio = 1;
-		analysisParameters.extract_bites_from_txt = 0;
+        analysisParameters.extract_bites_from_audio = 0;
+		analysisParameters.extract_bites_from_txt = 1;
         
         
         
