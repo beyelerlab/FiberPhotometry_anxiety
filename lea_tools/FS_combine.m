@@ -1,7 +1,7 @@
 clear all; clc; close all;
 
 
-p = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\plot\HFD';
+p = 'S:\_Lea\1.Data\PhotoM\20251210_aIC_NAc_pIC\20251218_FS\Analysis\output_test\plot';
 l = dir([p filesep '*.mat']);
 
 
@@ -51,7 +51,7 @@ for iMouse=1:length(l)
 
     peth_nanmean = nanmean(peth_fig);
     plot(peth_time, peth_nanmean, 'Color', [1 0.2 0.2]);
-    all_means(iMouse,:) = peth_nanmean(:,1:401);
+    all_means(iMouse,:) = peth_nanmean(:,:);
 
     [nTrials, nBins] = size(peth_fig);
 
@@ -69,11 +69,11 @@ f1 = figure('Name','AllMice');
 subplot(2,1,1);
 hold on
 for iMouse=1:length(l)
-    plot(peth_time(1:401), all_means(iMouse,:), 'Color', [0.6 0.6 0.6]);
+    plot(peth_time, all_means(iMouse,:), 'Color', [0.6 0.6 0.6]);
 end
 
 peth_nanmean = nanmean(all_means);
-plot(peth_time(1:401), peth_nanmean, 'Color', [1 0.2 0.2]);
+plot(peth_time, peth_nanmean, 'Color', [1 0.2 0.2]);
 
 [nTrials, nBins] = size(peth_fig);
 

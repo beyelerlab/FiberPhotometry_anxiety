@@ -21,7 +21,7 @@ tic;t0=toc;
 % for sucrose-quinine test - batchID='test_Sucrose-Quinine'
 % for foot shock test -  batchID='test_footshock'
 
-batchID='test_NSFT';
+batchID='test_footshock';
 
 %select and open 'getBatchAnalysisConfig_PB'. make sure that 'Function' folder
 %is also under working directory. Read and follow the instructions before
@@ -125,6 +125,10 @@ for iFolder=1:nFolders
         end
         
         if experiment.p.event_analysis
+
+            %% WARNING mouseXXX-events.txt need to be resample if behavior and photometry camera doesn't have same sampling rate
+            %% Events from RWD Events.csv file are already sampled has photometry data and saved as mouseXXX_events_idxsynchro.txt'
+
             experiment = preprocessEvents(experiment);
             nEventTypes = size(experiment.idx_synchro,2);
             idx_synchro = experiment.idx_synchro;

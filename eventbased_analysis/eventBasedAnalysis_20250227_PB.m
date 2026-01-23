@@ -155,12 +155,11 @@ transientsMatrix=[];
 if n_idx_synchro   
     
     transientsMatrix=get_peth(idx_synchro/sfreq,idx_transients/sfreq,edges_sec);   
-    
     for j=1:n_idx_synchro
         i = idx_synchro(j);
         idx = edges_idx + i;
         if idx(1)>0 && idx(end)<nFrames
-            bulkMatrix(j,:)=bulkSignal(idx);
+            bulkMatrix(j,:)=bulkSignal(cast(idx,"int32"));
         end
     end
     

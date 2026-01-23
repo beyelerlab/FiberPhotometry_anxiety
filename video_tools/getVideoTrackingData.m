@@ -9,7 +9,6 @@ function bonsai_output=getVideoTrackingData(params)
 % params.MouseCoordinatesCentroid = 'Nose';
 
 
-
 bonsaiClean=[params.dataRoot filesep params.dataFileTag '-bonsaiClean.mat'];
 if ~exist(bonsaiClean,'file') || params.forceGetBodyParts
     plt = params.getVideoTrackingData_plot;
@@ -23,9 +22,8 @@ if ~exist(bonsaiClean,'file') || params.forceGetBodyParts
     % presentation
     bonsaiPath=[params.dataRoot filesep params.dataFileTag '-bonsaiShifted.txt'];
     if ~exist(bonsaiPath,'file')
-        bonsaiPath=[params.dataRoot filesep params.dataFileTag '_bonsai.csv'];
+        bonsaiPath=[params.dataRoot filesep params.dataFileTag '-bonsai.txt'];
     end
-
 
 
     if exist(bonsaiPath,'file')
@@ -34,7 +32,11 @@ if ~exist(bonsaiClean,'file') || params.forceGetBodyParts
         bonsaiPath=[params.dataRoot filesep params.dataFileTag '_bonsai.csv'];
         if exist(bonsaiPath,'file')
             bonsai_output = getBonsaiData(bonsaiPath);
+        else
+            fprintf('Pas de bonsai ????')
+            pause()
         end
+
     end
 
 

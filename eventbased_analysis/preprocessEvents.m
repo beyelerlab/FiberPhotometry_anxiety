@@ -2,25 +2,46 @@ function experiment = preprocessEvents(experiment)
   
     sfreq = experiment.p.HamamatsuFrameRate_Hz;
 
-    if strfind(experiment.p.batchID,'NSFT')
-        if isfield(experiment.p,'extract_bites_from_audio') && experiment.p.extract_bites_from_audio
-            [audioEvents_sec,timeLag,nSTD,audioDetectionGap_sec] = nsft_getAudioEvents_05(experiment);
-            idx_synchro = discretize(audioEvents_sec, experiment.pData.t0);
-            idx_synchro(isnan(idx_synchro))=[]; 
-        else
-            if isfield(experiment.p,'extract_bites_from_txt') && experiment.p.extract_bites_from_txt
-                txt_path = [experiment.p.dataRoot filesep experiment.p.dataFileTag '.kdenlive']
-                if ~exist(txt_path,'file')
-                    fprintf('kdenlive file is missing\n');
-                else
-                    import_kdenlive_xml(txt_path)
-                    idx_synchro = load([experiment.p.dataRoot filesep experiment.p.dataFileTag '_events.txt']);
+    event_file_needed = true;
+
+    if event_file_needed
+        if strfind(experiment.p.batchID,'NSFT')
+    
+            if isfield(experiment.p,'extract_bites_from_audio') && experiment.p.extract_bites_from_audio
+                [audioEvents_sec,timeLag,nSTD,audioDetectionGap_sec] = nsft_getAudioEvents_05(experiment);
+                idx_synchro = discretize(audioEvents_sec, experiment.pData.t0);
+                idx_synchro(isnan(idx_synchro))=[]; 
+            else
+                if isfield(experiment.p,'extract_bites_from_txt') && experiment.p.extract_bites_from_txt
+                    txt_path = [experiment.p.dataRoot filesep experiment.p.dataFileTag '.kdenlive']
+                    if ~exist(txt_path,'file')
+                        fprintf('kdenlive file is missing\n');
+                    else
+                        import_kdenlive_xml(txt_path)
+                        idx_synchro = load([experiment.p.dataRoot filesep experiment.p.dataFileTag '_events.txt']);
+                        event_file_needed = false;
+                    end
                 end
-            end
+            end          
+        end
+    end
+
+
+    if event_file_needed
+
+        events_idxsynchro_path = [experiment.p.dataRoot filesep experiment.p.dataFileTag '_events_idxsynchro.txt']
+
+        if exist(events_idxsynchro_path,'file')
+            idx_synchro = load(events_idxsynchro_path);
+            idx_lag = experiment.pData.t0(1)*experiment.p.HamamatsuFrameRate_Hz;
+            idx_synchro = idx_synchro - idx_lag;
+            event_file_needed = false;
         end
 
-    else
+    end
 
+
+    if event_file_needed
         idx_synchro = findEventsIdx(experiment.vData.optoPeriod);
         dt_min_msec = experiment.p.minimum_gap_between_events_msec;
         warning(sprintf('Warning you are going to remove events that are too close to each other (dt < %d msec)',dt_min_msec));
@@ -28,7 +49,9 @@ function experiment = preprocessEvents(experiment)
         idx_synchro=cleanEvents(idx_synchro,dt_min_msec,sfreq);
         warning('cleaning events only works for home-made Hamamatsu system');
     end
-    
+
+
+
     if isempty(idx_synchro)
         msg = sprintf('Please remove all the files starting with %s* from %s and restart the program',experiment.p.dataFileTag, experiment.p.dataRoot);
         warning(msg)

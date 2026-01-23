@@ -24,6 +24,10 @@ else
 end
 
 if (framerate ~= p.HamamatsuFrameRate_Hz)
+
+
+    % Resampling of bonsai data
+
     warning('Program could not work if behavioral camera and hamamatsu camera have different frame rates');
     protectedFields = {'distance', 'videoInfo', 'nSamples0', 'num0', 't0'};
     vDataFields = fieldnames(vData);
@@ -47,6 +51,12 @@ if (framerate ~= p.HamamatsuFrameRate_Hz)
     vData.t0 = xq;
     vData.videoInfo.FrameRate = p.HamamatsuFrameRate_Hz;
     if p.protectMe, pause; end
+
+
+    %Resampling of event data
+    
+
+
 end
 
 % switch p.apparatus.type
