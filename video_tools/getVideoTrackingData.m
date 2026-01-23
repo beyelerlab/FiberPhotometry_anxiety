@@ -23,7 +23,7 @@ if ~exist(bonsaiClean,'file') || params.forceGetBodyParts
     % presentation
     bonsaiPath=[params.dataRoot filesep params.dataFileTag '-bonsaiShifted.txt'];
     if ~exist(bonsaiPath,'file')
-        bonsaiPath=[params.dataRoot filesep params.dataFileTag '-bonsai.txt'];
+        bonsaiPath=[params.dataRoot filesep params.dataFileTag '_bonsai.csv'];
     end
 
 

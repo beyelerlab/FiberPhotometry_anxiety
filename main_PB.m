@@ -21,7 +21,7 @@ tic;t0=toc;
 % for sucrose-quinine test - batchID='test_Sucrose-Quinine'
 % for foot shock test -  batchID='test_footshock'
 
-batchID='test_footshock';
+batchID='test_NSFT';
 
 %select and open 'getBatchAnalysisConfig_PB'. make sure that 'Function' folder
 %is also under working directory. Read and follow the instructions before
@@ -78,8 +78,8 @@ for iFolder=1:nFolders
         if ~isempty(p.lookingForMouse),processThisFile=0;if strcmp(p.dataFileTag,p.lookingForMouse),processThisFile=1;end;end
         
         % Depending of the histologfy status we skeep the analysis for the current file
-        status = getHistologyStatus(p.journal,p.dataFileTag);
-        if (isempty(status) | status<1), processThisFile=0;end
+        % status = getHistologyStatus(p.journal,p.dataFileTag);
+        % if (isempty(status) | status<1), processThisFile=0;end
         
         % MAIN PROCESSING
         

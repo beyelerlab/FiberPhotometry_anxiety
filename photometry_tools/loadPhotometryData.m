@@ -30,9 +30,9 @@ function [output, params_] = loadPhotometryData(params_)
     output.num0 = 1: output.nSamples;
     params_.system = 'FIP' 
     if exist('ts') % it's an RWD system
-        output.t0 = ts 
-        params_.HamamatsuFrameRate_Hz = 1/(mean(diff(output.t0)))*1000;
-        params_.system = 'RWD'
+        output.t0 = ts/1000;
+        params_.HamamatsuFrameRate_Hz = 1/ mean(diff(output.t0));
+        params_.system = 'RWD';
     else % it's a FIP system
         output.t0 = (1: output.nSamples) / (params_.HamamatsuFrameRate_Hz);
     end
