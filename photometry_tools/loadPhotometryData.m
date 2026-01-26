@@ -33,6 +33,13 @@ function [output, params_] = loadPhotometryData(params_)
         output.t0 = ts/1000;
         params_.HamamatsuFrameRate_Hz = 1/ mean(diff(output.t0));
         params_.system = 'RWD';
+        min_ = params_.eventBasedAnalysisEdges_msec(1);
+        max_ = params_.eventBasedAnalysisEdges_msec(end);
+        step_ms = round(1/(params_.HamamatsuFrameRate_Hz/1000));
+        tmp = min_:step_ms:max_;
+        params_.eventBasedAnalysisEdges_msec = tmp;
+
+
     else % it's a FIP system
         output.t0 = (1: output.nSamples) / (params_.HamamatsuFrameRate_Hz);
     end

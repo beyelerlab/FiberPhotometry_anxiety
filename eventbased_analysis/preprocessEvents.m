@@ -1,6 +1,7 @@
 function experiment = preprocessEvents(experiment)
   
     sfreq = experiment.p.HamamatsuFrameRate_Hz;
+    params = experiment.p;
 
     event_file_needed = true;
 
@@ -18,7 +19,28 @@ function experiment = preprocessEvents(experiment)
                         fprintf('kdenlive file is missing\n');
                     else
                         import_kdenlive_xml(txt_path)
-                        idx_synchro = load([experiment.p.dataRoot filesep experiment.p.dataFileTag '_events.txt']);
+
+                        idx_synchro = load([experiment.p.dataRoot filesep experiment.p.dataFileTag '_events.txt']); 
+
+                        % Here we tagged frames form behavior camera using
+                        % kdelive
+
+                        % We need to convert this indices (idx_synchro) because the fiber
+                        % phometry camera has a different frame rate and
+                        % because the beginning of the photometry recording
+                        % (ususally 60s) has been trimmed
+
+                        vidObj = VideoReader([params.dataRoot filesep params.dataFileTag '.' params.videoExtension]);
+                        beh_fr = vidObj.FrameRate;
+                        t_cut = params.remove_high_bleaching_period_sec;
+                        i_cut = t_cut * beh_fr;
+
+                        idx_synchro = idx_synchro(idx_synchro>i_cut); % we remove indices that are in the trimmed section
+                        idx_synchro = idx_synchro - i_cut; % we shift the indices to follow the time cut
+                        tps_synchro = idx_synchro / beh_fr; % we convert indices in time
+                        idx_synchro = tps_synchro * params.HamamatsuFrameRate_Hz; % we convert back the times to indices using photometry frame rate
+                        idx_synchro = round(idx_synchro);
+
                         event_file_needed = false;
                     end
                 end
@@ -43,11 +65,6 @@ function experiment = preprocessEvents(experiment)
 
     if event_file_needed
         idx_synchro = findEventsIdx(experiment.vData.optoPeriod);
-        dt_min_msec = experiment.p.minimum_gap_between_events_msec;
-        warning(sprintf('Warning you are going to remove events that are too close to each other (dt < %d msec)',dt_min_msec));
-        beep();
-        idx_synchro=cleanEvents(idx_synchro,dt_min_msec,sfreq);
-        warning('cleaning events only works for home-made Hamamatsu system');
     end
 
 
@@ -57,6 +74,14 @@ function experiment = preprocessEvents(experiment)
         warning(msg)
         pause
     end
+
+
+
+    dt_min_msec = experiment.p.minimum_gap_between_events_msec;
+    warning(sprintf('Warning you are going to remove events that are too close to each other (dt < %d msec)',dt_min_msec));
+    beep();
+    warning('cleaning events only works for home-made Hamamatsu system');
+    idx_synchro=cleanEvents(idx_synchro,dt_min_msec,sfreq);
     
     if experiment.p.keep_first_and_last_events_only
         tmp = idx_synchro;

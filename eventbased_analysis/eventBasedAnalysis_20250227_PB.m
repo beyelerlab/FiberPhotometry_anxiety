@@ -59,7 +59,7 @@ function experiment = eventBasedAnalysis_20250227_PB(experiment)
     
         
         m1 = find(edges_msec>=minmax_window_msec(1),1,'first');
-        m2 = find(edges_msec<minmax_window_msec(2),1,'last');  
+        m2 = find(edges_msec<=minmax_window_msec(2),1,'last');  
         
         [r,c]=size(experiment.pData.bulkPETH.zcored_matrix);
         if r>1           
@@ -143,7 +143,11 @@ edges_sec = edges_msec/1000;
 zeroPosition = find(edges_sec==0);
 zeroPositionPerc = (zeroPosition/size(edges_sec,2))*100;
 windowSize_sec = edges_sec(end)-edges_sec(1);
-nColumns = ceil(windowSize_sec*sfreq)+1;
+
+%SD 26/01/2026
+% nColumns = ceil(windowSize_sec*sfreq)+1;
+nColumns = ceil(windowSize_sec*sfreq);
+
 edges_idx = 1:nColumns;
 zeroPosition = floor((size(edges_idx,2)*zeroPositionPerc)/100);
 edges_idx = edges_idx - zeroPosition;
