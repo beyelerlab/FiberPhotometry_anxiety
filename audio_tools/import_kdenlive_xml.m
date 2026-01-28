@@ -26,6 +26,9 @@ if i_marker
     end
     fclose(fod);
 else
+    fod = fopen([filepath filesep name '_events.txt'],'w');
+    fprintf(fod,"no_events\n");
+    fclose(fod);
     fprintf('problem with kdenlive file')
 end
 

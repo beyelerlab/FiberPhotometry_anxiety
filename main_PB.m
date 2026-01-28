@@ -21,7 +21,7 @@ tic;t0=toc;
 % for sucrose-quinine test - batchID='test_Sucrose-Quinine'
 % for foot shock test -  batchID='test_footshock'
 
-batchID='test_footshock';
+batchID='test_NSFT';
 
 %select and open 'getBatchAnalysisConfig_PB'. make sure that 'Function' folder
 %is also under working directory. Read and follow the instructions before
@@ -130,24 +130,19 @@ for iFolder=1:nFolders
             %% Events from RWD Events.csv file are already sampled has photometry data and saved as mouseXXX_events_idxsynchro.txt'
 
             experiment = preprocessEvents(experiment);
-            nEventTypes = size(experiment.idx_synchro,2);
-            idx_synchro = experiment.idx_synchro;
-            for iEventType=1:nEventTypes                
-                experiment.idx_synchro = idx_synchro{iEventType};
-                experiment = eventBasedAnalysis_20250227_PB(experiment);
-                if experiment.p.spatial_analysis
-                    experiment = eventBasedFreezingAnalysis_PB(experiment);
+            if ~isempty(experiment.idx_synchro{1}{1})
+                nEventTypes = size(experiment.idx_synchro,2);
+                idx_synchro = experiment.idx_synchro;   
+    
+                for iEventType=1:nEventTypes                
+                    experiment.idx_synchro = idx_synchro{iEventType};
+                    experiment = eventBasedAnalysis_20250227_PB(experiment);
+                    if experiment.p.spatial_analysis
+                        experiment = eventBasedFreezingAnalysis_PB(experiment);
+                    end
                 end
-
-
-
-
-
-
-
-
+                experiment.idx_synchro=idx_synchro;
             end
-            experiment.idx_synchro=idx_synchro;
         end
 
            

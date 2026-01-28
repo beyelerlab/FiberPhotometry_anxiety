@@ -19,8 +19,12 @@ function experiment = preprocessEvents(experiment)
                         fprintf('kdenlive file is missing\n');
                     else
                         import_kdenlive_xml(txt_path)
-
-                        idx_synchro = load([experiment.p.dataRoot filesep experiment.p.dataFileTag '_events.txt']); 
+                        idx_synchro = []
+                        try
+                            idx_synchro = load([experiment.p.dataRoot filesep experiment.p.dataFileTag '_events.txt']); 
+                        catch
+                            fprintf('no events')
+                        end
 
                         % Here we tagged frames form behavior camera using
                         % kdelive
@@ -71,8 +75,7 @@ function experiment = preprocessEvents(experiment)
 
     if isempty(idx_synchro)
         msg = sprintf('Please remove all the files starting with %s* from %s and restart the program',experiment.p.dataFileTag, experiment.p.dataRoot);
-        warning(msg)
-        pause
+        warning(msg);
     end
 
 
