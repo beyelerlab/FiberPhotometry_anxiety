@@ -1,8 +1,4 @@
-%
-%
 clear all; clc
-
-%   load('mamap.mat');
 
 path='S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\EPM_Zscore\output2\good_heatmaps\SD';
 outputpath='S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\EPM_Zscore\output2\good_heatmaps\SD';
@@ -10,53 +6,46 @@ outputpath='S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC
 dirOutput=dir(fullfile(path,'*.mat'));
 fileNames={dirOutput.name};
 n=length(fileNames);
-map=nan(150,150,n);
-occ_map = nan(150,150,n);
+map=[];
+occ_map=[];
 
 
-for i=1:n
-    
+MapScale_cmPerBin = 0;
+
+for i=1:n    
     tmp_file=char(fileNames(i));
     tmp_path=[path filesep tmp_file];
     load(tmp_path)
-    ii = isnan(experiment.map.NormSig.IO);
-    experiment.map.NormSig.IO(ii)=0;
-    gaussFilt_PercAvgSigMap = imgaussfilt(experiment.map.NormSig.IO,2);
-    gaussFilt_PercAvgSigMap(ii)=nan;
-    % gaussFilt_PercAvgSigMap=gaussFilt_PercAvgSigMap./max(gaussFilt_PercAvgSigMap(:));
-    % map(:,:,i)=gaussFilt_PercAvgSigMap;
-
+    MapScale_cmPerBin = experiment.p.MapScale_cmPerBin;
+    if i==1
+       tmp = experiment.map.NormSig.IO;
+       map = nan(size(tmp,1), size(tmp,2), n);
+       occ_map = map;
+    end
     map(:,:,i)=experiment.map.NormSig.IO;
-
-
-    occ_map(:,:,i)=experiment.map.Occ.IO;
-    
-    xMax=experiment.p.xMax/0.5;
-    yMax=experiment.p.yMax/0.5;
-    apparatusDesign_cmSP = experiment.apparatusDesign_cmSP;
-    
-    filename = [outputpath filesep 'Heatmap_' experiment.p.dataFileTag];
-
-    % plot_heatmap(gaussFilt_PercAvgSigMap, experiment.map.Occ.IO, xMax, yMax, apparatusDesign_cmSP, filename, experiment)  
-    
+    occ_map(:,:,i)=experiment.map.Occ.IO;  
 end
 
 
-map=nanmean(map, 3);
-occ_map = nansum(occ_map, 3);
-xMax=experiment.p.xMax/0.5;
-yMax=experiment.p.yMax/0.5;
+map= mean(map, 3, 'omitnan');
+occ_map = sum(map, 3, 'omitnan');
+
+imagesc(map)
+
+xMax=experiment.p.xMax/MapScale_cmPerBin;
+yMax=experiment.p.yMax/MapScale_cmPerBin;
+filename = fullfile(outputpath,'Heatmap_wo_smoothing');
+plot_heatmap(map, occ_map, xMax, yMax, filename, experiment, []);
+filename = fullfile(outputpath,'Heatmap_gaussian_smoothing');
+plot_heatmap(map, occ_map, xMax, yMax, filename, experiment, 0.75);
+
+
+
+function plot_heatmap(map, occ_map, xMax, yMax, filename, experiment, gaussian_sigma)
+
+
+MapScale_cmPerBin = experiment.p.MapScale_cmPerBin;
 apparatusDesign_cmSP = experiment.apparatusDesign_cmSP;
-
-filename = fullfile(outputpath,'Heatmap');
-
-plot_heatmap(map, occ_map, xMax, yMax, apparatusDesign_cmSP, filename, experiment);
-
-
-
-
-function plot_heatmap(map, occ_map, xMax, yMax, apparatusDesign_cmSP, filename, experiment)
-
 
 ii = find(occ_map==0);
 map(ii)=NaN;
@@ -71,9 +60,7 @@ ylim([0 yMax])
 set(gca,'Ydir','reverse')
 
 colormap([1 1 1; jet(1024)]);
-
-
-im=imagesc(map);
+map_mask = zeros(size(map));
 
 hBar=colorbar('horiz');
 box off
@@ -82,8 +69,8 @@ set(get(hBar,'title'),'string','\Delta F/F (%)','Fontname', 'Arial', 'Fontsize',
 %set(hBar, 'Position', [0.624 0.046 0.2 0.02], 'YTickLabel', {'-1','0','3'},'Fontname', 'Arial', 'Fontsize', 10);
 set(0,'defaultfigurecolor','w')
 
-x=apparatusDesign_cmSP.x/0.5;
-y=apparatusDesign_cmSP.y/0.5;
+x=apparatusDesign_cmSP.x/MapScale_cmPerBin;
+y=apparatusDesign_cmSP.y/MapScale_cmPerBin;
 
 % Zone Ordering
 zones_ = experiment.vData.zones_cmSP;
@@ -92,6 +79,30 @@ idx_open = find(ismember(types_, 'open'));
 idx_closed = find(ismember(types_, 'closed'));
 idx_center = find(ismember(types_, 'center'));
 idx_ordered = [idx_open idx_closed idx_center];
+
+for iZ=1:size(zones_,2)
+    X = int32((zones_(iZ).X)/MapScale_cmPerBin);
+    Y = int32((zones_(iZ).Y)/MapScale_cmPerBin);
+    W = int32((zones_(iZ).W)/MapScale_cmPerBin);
+    H = int32((zones_(iZ).H)/MapScale_cmPerBin);
+    map_mask(X+1:X+W-1, Y+1:Y+H-1) = ones(W-1,H-1);
+    % imagesc(map_mask)
+end
+
+
+nan_map = nan(size(map));
+map(~map_mask) = nan_map(~map_mask);
+
+if ~isempty(gaussian_sigma)
+    ii = isnan(map);
+    map(ii)=0;
+    map = imgaussfilt(map,0.75);
+    map(ii)=nan;
+end
+
+
+
+imagesc(map);
 
 for iZ=1:size(idx_ordered,2)
     type = zones_(idx_ordered(iZ)).type
@@ -105,15 +116,13 @@ for iZ=1:size(idx_ordered,2)
         linedef = 'k';
     end
     hold on
-    x = zones_(idx_ordered(iZ)).xV/0.5;
-    y = zones_(idx_ordered(iZ)).yV/0.5;
+    x = zones_(idx_ordered(iZ)).xV/MapScale_cmPerBin;
+    y = zones_(idx_ordered(iZ)).yV/MapScale_cmPerBin;
     x = [x x(1)];
     y = [y y(1)];
     plot(x,y, linedef, 'linewidth',1)
-    hold on
+    
 end
-
-
 
 print(filename,'-depsc','-painters','-r1200');
 print(filename, '-dpdf');

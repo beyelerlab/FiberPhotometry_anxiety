@@ -1,7 +1,7 @@
 clc; clear; close all
 
 % fip = "E:\NAS_SD\SuiviClient\Beyeler\DATA\20230502_NSFT\Inputs\F2434.mat"
-data_root = 'S:\_Lea\1.Data\20251125_aIC-aIC_aIC-LHr\20251124_sig_check'
+data_root = 'S:\_Lea\1.Data\PhotoM\20251210_aIC_NAc_pIC\20251218_FS'
 
 subdir_list = dir([data_root filesep '*'])
 n_subdir = size(subdir_list, 1);
