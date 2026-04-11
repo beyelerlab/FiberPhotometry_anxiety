@@ -5,10 +5,10 @@ switch batchID
     
     %% OFT SPECIFIC PARAMETERS
     case 'test_OFT'                
-
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20260119_Carolina\SI-FiberAdult\OFT_SI-FiberAdult';       
+        dataRoot{1} =  'S:\_Cï¿½line\Manips\1. REVISION PAPER\Revision2_aIC\20221129_OFT\Inputs';
+        
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20260119_Carolina\SI-FiberAdult\OFT_SI-FiberAdult\Analysis';
+            outputFolder = 'S:\_Cï¿½line\Manips\1. REVISION PAPER\Revision2_aIC\20221129_OFT\Ouputs';
         end
         
         journalFolder =  outputFolder;
@@ -29,9 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250923_EPM';
+        dataRoot{1} =  'C:\Users\sebas\Downloads\LBN11_pIC\EPM\inputs';
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250923_EPM\Analysis\Output';
+            outputFolder = 'C:\Users\sebas\Downloads\LBN11_pIC\EPM\outputs' ;
         end
         
         journalFolder = outputFolder;
@@ -58,9 +58,9 @@ switch batchID
     %% Sucrose In OFT SPECIFIC PARAMETERS
     case 'test_SQ'
         
-        dataRoot{1} =  'S:\_Céline\Manips\Manip for paper anxiety\2. REVISION 2\QUININE ALL\INPUT pIC';
+        dataRoot{1} =  'S:\_Cï¿½line\Manips\Manip for paper anxiety\2. REVISION 2\QUININE ALL\INPUT pIC';
         if isempty(outputFolder)
-            outputFolder = 'S:\_Céline\Manips\Manip for paper anxiety\2. REVISION 2\QUININE ALL\OUTPUT pIC' ;
+            outputFolder = 'S:\_Cï¿½line\Manips\Manip for paper anxiety\2. REVISION 2\QUININE ALL\OUTPUT pIC' ;
         end
         journalFolder = outputFolder;
         
@@ -103,11 +103,12 @@ switch batchID
         analysisParameters.map_linearization = 0;
         analysisParameters.event_analysis = 1;      
         
-        %% fOOTSHOCK SPECIFIC PARAMETERS    
-    case 'test_footshock'
-        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\input';
+        %% TailSuspension SPECIFIC PARAMETERS    
+    case 'CN_FootShocks_20220518'
+
+        dataRoot{1} =  'S:\_Cï¿½line\Manips\1. REVISION PAPER\Revision2_pIC\20221027_Tail Suspension\inputs';
         if isempty(outputFolder)
-            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\output' ;
+            outputFolder = 'S:\_Cï¿½line\Manips\1. REVISION PAPER\Revision2_pIC\20221028_FS\Output' ;
         end
         journalFolder = outputFolder;
                
