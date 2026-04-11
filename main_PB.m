@@ -22,7 +22,7 @@ tic;t0=toc;
 % for sucrose-quinine test - batchID='test_Sucrose-Quinine'
 % for foot shock test -  batchID='test_footshock'
 
-batchID='test_NSFT';
+batchID='test_EPM';
 
 %select and open 'getBatchAnalysisConfig_PB'. make sure that 'Function' folder
 %is also under working directory. Read and follow the instructions before
@@ -110,8 +110,8 @@ for iFolder=1:nFolders
             experiment = getApparatusZones(experiment);      
 
             experiment = getZonesStatistics_PB(experiment);
-
-%             experiment = getZonesStatistics_TimeBins_PB(experiment);
+            
+            experiment = getZonesStatistics_TimeBins_PB(experiment);
             
             if experiment.p.map_linearization                              
                 % for test you can use the test-block #1 located at the end of this file

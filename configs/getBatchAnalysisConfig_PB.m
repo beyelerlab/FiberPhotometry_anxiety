@@ -29,9 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-        dataRoot{1} =  'S:\_C�line\Papers\aIC anxiety and valence\Submission R2\Analysis R2\Linear EPM R2\Input pIC';
+        dataRoot{1} =  'C:\Users\sebas\Downloads\LBN11_pIC\EPM\inputs';
         if isempty(outputFolder)
-            outputFolder = 'S:\_C�line\Papers\aIC anxiety and valence\Submission R2\Analysis R2\Linear EPM R2\Output pIC' ;
+            outputFolder = 'C:\Users\sebas\Downloads\LBN11_pIC\EPM\outputs' ;
         end
         
         journalFolder = outputFolder;
