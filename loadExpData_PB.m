@@ -4,6 +4,7 @@ function experiment = loadExpData_PB(p)
 vData = getVideoTrackingData(p);
 % vData.bg=getBackGroundSlow(p);
 [pData, p] = loadPhotometryData(p);
+[pData, p] = loadPhotometryData(p);
 
 % if ~isfield(vData.videoInfo,'FrameRate')
 %     vData.videoInfo=getVideoInfo(p);
@@ -13,24 +14,36 @@ vData = getVideoTrackingData(p);
 % end
 
 
-if ~isfield(vData.videoInfo,'FrameRate')
-    framerate = 20;
+if exist([p.dataRoot filesep sprintf('%s-fr.txt',p.dataFileTag)],'file')
+    framerate = load([p.dataRoot filesep sprintf('%s-fr.txt',p.dataFileTag)]);
 else
-    framerate = vData.videoInfo.FrameRate;
+    if ~isfield(vData.videoInfo,'FrameRate')
+        framerate = 20;
+    else
+        framerate = vData.videoInfo.FrameRate;
+    end
 end
 
 if (framerate ~= p.HamamatsuFrameRate_Hz)
+
+
+    % Resampling of bonsai data
+
     warning('Program could not work if behavioral camera and hamamatsu camera have different frame rates');
-    protectedFields = {'distance', 'videoInfo', 'nSamples0', 'num0', 't0'}
+    protectedFields = {'distance', 'videoInfo', 'nSamples0', 'num0', 't0'};
     vDataFields = fieldnames(vData);
-    vDataFields = setdiff(vDataFields,protectedFields)
+    vDataFields = setdiff(vDataFields,protectedFields);
     nDataFields = size(vDataFields,1);
-    x = squeeze(vData.t0);
-    xq = pData.t0/1000;
+    nFrames = size(vData.t0,1);
+    x = 1:nFrames;
+    x = x/framerate;
+    xq = pData.t0;
     for i=1:nDataFields
-        curField = vDataFields{i}
-        v = getfield(vData, curField);
+        curField = vDataFields{i};
+        v = getfield(vData, curField);             
         vq = interp1(x, v, xq);
+        [r,c] = size(vq);
+        if (r<c), vq = vq';end
         vData = setfield(vData, curField, vq);       
     end
     vData = getDistance(vData);
@@ -39,6 +52,11 @@ if (framerate ~= p.HamamatsuFrameRate_Hz)
     vData.t0 = xq;
     vData.videoInfo.FrameRate = p.HamamatsuFrameRate_Hz;
     if p.protectMe, pause; end
+
+
+    %Resampling of event data
+    
+
 
 end
 
@@ -164,12 +182,12 @@ pData = detectAbnormalNegativeValuesInPhotometryRawData(pData);
 vData=cleanPosBasedOnSpeedThreshold(vData,p); % remove all position when animal speed exceed 20 pixel per sec.
 
 %% CREATES TIME VECTOR
-nFrames = size(vData.mainX,1);T = 1: nFrames;T = T./ p.HamamatsuFrameRate_Hz;  pData.T = T; vData.nFrames = nFrames; %recreate time vector based on fiber-photometry frame rate
+nFrames = max(size(vData.mainX));T = 1: nFrames;T = T./ p.HamamatsuFrameRate_Hz;  pData.T = T; vData.nFrames = nFrames; %recreate time vector based on fiber-photometry frame rate
 
 % delete if code doesn't ask for it
 % vData_includingDisconnectionPeriods.nFrames = nFrames;
 
-if size(pData.sig,1) ~= size(vData.mainX,1)
+if max(size(pData.sig)) ~= max(size(vData.mainX))
     fprintf('\t#Hamamatsu %d',size(pData.sig,1));fprintf('\t\t#BlackFly %d\n',size(vData.mainX,1));
     pause;
 end
@@ -180,3 +198,4 @@ experiment.vData=vData;
 experiment.pData=pData;
 
 end
+

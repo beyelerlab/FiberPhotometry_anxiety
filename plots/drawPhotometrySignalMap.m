@@ -24,12 +24,17 @@ if ~exist(figName,'file') || params.forceRedrawing
 
 % 
     colormap([0.9 0.9 0.9; jet(2056)]);
-    
-    ii = isnan(PercAvgSigMap);
-    PercAvgSigMap(ii)=0;
-    gaussFilt_PercAvgSigMap = imgaussfilt(PercAvgSigMap,params.PhotometrySignalMap_sigmaGaussFilt);
-    gaussFilt_PercAvgSigMap(ii)=nan;
-    im=imagesc(gaussFilt_PercAvgSigMap);
+
+    if params.PhotometrySignalMap_sigmaGaussFilt    
+        ii = isnan(PercAvgSigMap);
+        PercAvgSigMap(ii)=0;
+        gaussFilt_PercAvgSigMap = imgaussfilt(PercAvgSigMap,params.PhotometrySignalMap_sigmaGaussFilt);
+        gaussFilt_PercAvgSigMap(ii)=nan;
+        im=imagesc(gaussFilt_PercAvgSigMap);
+    else
+        im=imagesc(PercAvgSigMap);
+    end
+
     bg=getBackGroundQuick(params);
     sMax = max(size(bg));
     colorbar();

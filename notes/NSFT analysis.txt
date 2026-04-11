@@ -1,0 +1,21 @@
+En fonction des bacth si on a la led de synchro pour la side-view et le son dans le fichier video sideview
+il faudra modifier le fichier getBatchAnalysisConfig_PB.m 
+
+sideview video: LED synchro ON, son ON (pour RIM par exemple)
+        analysisParameters.extract_bites_from_audio = 1;
+		analysisParameters.extract_bites_from_txt = 0;
+		
+
+sideview video: LED synchro ON, son OFF (pour Victor, Lea B1, ...)
+        analysisParameters.extract_bites_from_audio = 0;
+		analysisParameters.extract_bites_from_txt = 1;
+		in kdenlive, ouvrir un seul fichier video a la fois faire des repères avec la touche '*'
+		puis enregistrer sous F2314.kdenlive
+
+
+		
+
+dans nsft_getAudioEvents_05:
+audioDetectionGap_sec = 1; si deux bites sont distantes de plus de 1 sec, alors on aura deux évènements
+
+Il manquait le pData.t0, qui permet d'aligner la sideview avec la photometry trim d'une minute

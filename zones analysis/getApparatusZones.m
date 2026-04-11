@@ -3,7 +3,8 @@ vData = experiment.vData;
 p=experiment.p;
 switch p.apparatus.type
     case 'EPM'
-         vData.zones_cmSP=epmDesing2Zones(experiment.apparatusDesign_cmSP);    
+         vData.zones_cmSP=epmDesing2Zones(experiment.apparatusDesign_cmSP);   
+
      case 'NSFT'
          vData.zones_cmSP=oftDesing2Zones(experiment.apparatusDesign_cmSP,p.apparatusCenterZoneSize_propOfTotalArea);    
      case 'HOMECAGE-FD'
@@ -18,6 +19,11 @@ switch p.apparatus.type
 %          From 20190715, we decided to use 50%/50% Area ratio between center and border, so we use the OFT funciton who does the same now.
 %          vData.zones_cmSP=nsftDesing2Zones(experiment_tmp.apparatusDesign_cmSP,p.apparatusZoningRatio);               
         vData.zones_cmSP=homeCageDesing2Zones(experiment.apparatusDesign_cmSP,p.apparatusCenterZoneSize_propOfTotalArea);    
+
+
+    case 'Fear'         
+        vData.zones_cmSP=oftDesing2Zones(experiment.apparatusDesign_cmSP,p.apparatusCenterZoneSize_propOfTotalArea);    
+
      case 'OFT'
          vData.zones_cmSP=oftDesing2Zones(experiment.apparatusDesign_cmSP,p.apparatusCenterZoneSize_propOfTotalArea);    
       case 'RTPP'

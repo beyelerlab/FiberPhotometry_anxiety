@@ -17,14 +17,20 @@ if ~exist(figName,'file') || params.forceRedrawing
     ylim([0 yMax])
     set(gca,'Ydir','reverse')
     colormap([0.9 0.9 0.9; jet(2056)]);
+
     OccupancyMapSec = OccupancyMapFrame/params.behaviorCameraFrameRate_Hz;
-    ii=find(OccupancyMapSec==0);
-    OccupancyMapSec(ii)=nan;
-    ii = isnan(OccupancyMapSec);
-    OccupancyMapSec(ii)=0;
-    gaussFilt_OccupancyMapSec = imgaussfilt(OccupancyMapSec,params.OccupancyMap_sigmaGaussFilt);
-    gaussFilt_OccupancyMapSec(ii)=nan;
+
+    if params.OccupancyMap_sigmaGaussFilt
+        ii=find(OccupancyMapSec==0);
+        OccupancyMapSec(ii)=nan;
+        ii = isnan(OccupancyMapSec);
+        OccupancyMapSec(ii)=0;
+        gaussFilt_OccupancyMapSec = imgaussfilt(OccupancyMapSec,params.OccupancyMap_sigmaGaussFilt);
+        gaussFilt_OccupancyMapSec(ii)=nan;
+    end
+
     im=imagesc(gaussFilt_OccupancyMapSec);
+    
     bg=getBackGroundQuick(params);
     sMax = max(size(bg));
     colorbar();

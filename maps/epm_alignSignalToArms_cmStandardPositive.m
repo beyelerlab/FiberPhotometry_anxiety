@@ -36,8 +36,8 @@ for iZone =1:5
         case 'CENTER'
             LZ{iZone} = nanmedian(nanmedian(Map(y1:y2,x1:x2)));
           %  Sum(1,iZone)=nanmean(nanmean([Z{iZone}(:,:)]));
+        end
     end
-end
 
 Openarm=nanmean((LZ{1,1}+LZ{1,3}),1);
 Closearm=nanmean((LZ{1,2}+LZ{1,4}),1);

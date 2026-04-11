@@ -1,3 +1,8 @@
+%% time tracking
+% SD: 20231023, 0.5h
+% SD 20231025, 10 min.
+
+
 % updated on March 8, 2022. Beyeler lab, INSERM.
 %This script calls getBatchAnalysisConfig_PB to locate the input folder
 %with three files - 1) video file in .avi format; 2) .mat file containing the fiber
@@ -15,12 +20,14 @@ tic;t0=toc;
 % for elevated plus maze - batchID= 'test_EPM'
 % for open-feild test - batchID='test_OFT'
 % for sucrose-quinine test - batchID='test_Sucrose-Quinine'
-% for foot shock test -  batchID='test_Foot-shock'
-batchID='test_EPM';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+% for foot shock test -  batchID='test_footshock'
+
+batchID='test_NSFT';
+
 %select and open 'getBatchAnalysisConfig_PB'. make sure that 'Function' folder
 %is also under working directory. Read and follow the instructions before
 %coming back to this script and running it.
+
 
 %Once you 'run' this script, another window will popup asking the user to
 %mark the four corners of the open arm (for EPM test) or four corners of
@@ -72,8 +79,8 @@ for iFolder=1:nFolders
         if ~isempty(p.lookingForMouse),processThisFile=0;if strcmp(p.dataFileTag,p.lookingForMouse),processThisFile=1;end;end
         
         % Depending of the histologfy status we skeep the analysis for the current file
-        status = getHistologyStatus(p.journal,p.dataFileTag);
-        if (isempty(status) | status<1), processThisFile=0;end
+        % status = getHistologyStatus(p.journal,p.dataFileTag);
+        % if (isempty(status) | status<1), processThisFile=0;end
         
         % MAIN PROCESSING
         
@@ -104,7 +111,7 @@ for iFolder=1:nFolders
 
             experiment = getZonesStatistics_PB(experiment);
 
-            experiment = getZonesStatistics_TimeBins_PB(experiment);
+%             experiment = getZonesStatistics_TimeBins_PB(experiment);
             
             if experiment.p.map_linearization                              
                 % for test you can use the test-block #1 located at the end of this file
@@ -119,7 +126,24 @@ for iFolder=1:nFolders
         end
         
         if experiment.p.event_analysis
-            experiment = eventBasedAnalysis_20220518_PB(experiment);
+
+            %% WARNING mouseXXX-events.txt need to be resample if behavior and photometry camera doesn't have same sampling rate
+            %% Events from RWD Events.csv file are already sampled has photometry data and saved as mouseXXX_events_idxsynchro.txt'
+
+            experiment = preprocessEvents(experiment);
+            if ~isempty(experiment.idx_synchro{1}{1})
+                nEventTypes = size(experiment.idx_synchro,2);
+                idx_synchro = experiment.idx_synchro;   
+    
+                for iEventType=1:nEventTypes                
+                    experiment.idx_synchro = idx_synchro{iEventType};
+                    experiment = eventBasedAnalysis_20250227_PB(experiment);
+                    if experiment.p.spatial_analysis
+                        experiment = eventBasedFreezingAnalysis_PB(experiment);
+                    end
+                end
+                experiment.idx_synchro=idx_synchro;
+            end
         end
 
            

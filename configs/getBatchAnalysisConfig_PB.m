@@ -1,14 +1,14 @@
 function [dataRoot,outputFolder,apparatus,videoExt,analysisParameters]=getBatchAnalysisConfig_PB(batchID,machine,analysisParameters,outputFolder)
 
-
+%% Thibault 3
 switch batchID
     
     %% OFT SPECIFIC PARAMETERS
     case 'test_OFT'                
-        dataRoot{1} =  'S:\___DATA\Photometry and behavior-parts\02_ANALYSIS\20250224_GCaMP_5HT1A_batch1\OFT\Input';
+        dataRoot{1} =  'S:\_Cï¿½line\Manips\1. REVISION PAPER\Revision2_aIC\20221129_OFT\Inputs';
         
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\Photometry and behavior-parts\02_ANALYSIS\20250224_GCaMP_5HT1A_batch1\OFT\Output';
+            outputFolder = 'S:\_Cï¿½line\Manips\1. REVISION PAPER\Revision2_aIC\20221129_OFT\Ouputs';
         end
         
         journalFolder =  outputFolder;
@@ -21,7 +21,7 @@ switch batchID
         apparatus{1}.Model='Yifan';
         apparatus{1}.side_cm = 60; % Open Arms Envergure                
         
-        videoExt{1}='avi';
+        videoExt{1}='mp4';
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 0;
@@ -29,9 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250401_LBN4\20250401_EPM\EPM\Analysis\input';
+        dataRoot{1} =  'S:\_Cï¿½line\Papers\aIC anxiety and valence\Submission R2\Analysis R2\Linear EPM R2\Input pIC';
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250401_LBN4\20250401_EPM\EPM\Analysis\output';
+            outputFolder = 'S:\_Cï¿½line\Papers\aIC anxiety and valence\Submission R2\Analysis R2\Linear EPM R2\Output pIC' ;
         end
         
         journalFolder = outputFolder;
@@ -50,15 +50,17 @@ switch batchID
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 1;
+
+        %To analyse arm entries or arm exits
         analysisParameters.event_analysis = 0;
                          
        
     %% Sucrose In OFT SPECIFIC PARAMETERS
-    case 'CN_Sucrose_20220518'
+    case 'test_SQ'
         
-        dataRoot{1} =  'S:\_Céline\Manips\Manip for paper anxiety\2. REVISION 2\QUININE ALL\INPUT pIC';
+        dataRoot{1} =  'S:\_Cï¿½line\Manips\Manip for paper anxiety\2. REVISION 2\QUININE ALL\INPUT pIC';
         if isempty(outputFolder)
-            outputFolder = 'S:\_Céline\Manips\Manip for paper anxiety\2. REVISION 2\QUININE ALL\OUTPUT pIC' ;
+            outputFolder = 'S:\_Cï¿½line\Manips\Manip for paper anxiety\2. REVISION 2\QUININE ALL\OUTPUT pIC' ;
         end
         journalFolder = outputFolder;
         
@@ -78,7 +80,7 @@ switch batchID
         analysisParameters.event_analysis = 1;
         
     %% TailSuspension SPECIFIC PARAMETERS    
-    case 'CN_TailSuspension_20220518'
+    case 'test_TS'
 
         dataRoot{1} =  'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\20240208_aIC_pIC_HFD\20240220_Tailsuspension\input';
         if isempty(outputFolder)
@@ -104,22 +106,23 @@ switch batchID
         %% TailSuspension SPECIFIC PARAMETERS    
     case 'CN_FootShocks_20220518'
 
-        dataRoot{1} =  'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\GRAB\GRAB_DA\D1-cre\aIC\Batch4\20230331_FS\Input\input_zscore';
+        dataRoot{1} =  'S:\_Cï¿½line\Manips\1. REVISION PAPER\Revision2_pIC\20221027_Tail Suspension\inputs';
         if isempty(outputFolder)
-            outputFolder = 'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\GRAB\GRAB_DA\D1-cre\aIC\Batch4\20230331_FS\Output\output_zscore' ;
+            outputFolder = 'S:\_Cï¿½line\Manips\1. REVISION PAPER\Revision2_pIC\20221028_FS\Output' ;
         end
         journalFolder = outputFolder;
                
         analysisParameters.apparatusNormalizationRequested = 0;
-        analysisParameters.apparatusCenterZoneSize_propOfTotalArea = 0.1;
+        analysisParameters.apparatusCenterZoneSize_propOfTotalArea = 0.00001;
         analysisParameters.MouseCoordinatesCentroid = 'Body';
         analysisParameters.MapScale_cmPerBin = 0.5;
                 
-        apparatus{1}.type='';
+        apparatus{1}.type='Fear';
         apparatus{1}.Model='';
-        apparatus{1}.side_cm = 0; 
+        apparatus{1}.width_cm = 48; 
+        apparatus{1}.height_cm = 25.4; 
         
-        videoExt{1}='avi';   
+        videoExt{1}='mp4';   
                 
         analysisParameters.spatial_analysis = 0;
         analysisParameters.map_linearization = 0;
@@ -128,10 +131,11 @@ switch batchID
     %% TailSuspension SPECIFIC PARAMETERS    
     case 'test_NSFT'
 
-        dataRoot{1} =  'Y:\PhotometryAndBehavior\01_DATA\ONE_COLOR\20240205_aIC_pIC_HFD\NSFT';
+        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT';
         if isempty(outputFolder)
-            outputFolder = 'Y:\PhotometryAndBehavior\03_ANALYSIS\ONE_COLOR_analysis\20240208_aIC_pIC_HFD\NSFT' ;
+            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT\Analysis' ;
         end
+
         journalFolder = outputFolder;
                
         analysisParameters.apparatusNormalizationRequested = 0;
@@ -143,12 +147,14 @@ switch batchID
         apparatus{1}.Model='';
         apparatus{1}.side_cm = 60;
         
-        videoExt{1}='avi';   
+        videoExt{1}='mp4';   
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 0;
         analysisParameters.event_analysis = 1; 
+        
         analysisParameters.extract_bites_from_audio = 0;
+		analysisParameters.extract_bites_from_txt = 1;
         
         
         
@@ -158,10 +164,8 @@ switch batchID
 
         
         dataRoot{1} =  'E:\NAS_SD\SuiviClient\Beyeler\DATA\TestTransientDetection\Inputs';
-%                 dataRoot{1} =  'E:\NAS_SD\SuiviClient\Beyeler\DATA\Alba\ThreeChambers\Inputs';
         if isempty(outputFolder)
             outputFolder = 'E:\NAS_SD\SuiviClient\Beyeler\DATA\TestTransientDetection\Outputs' ;
-%                         outputFolder = 'E:\NAS_SD\SuiviClient\Beyeler\DATA\Alba\ThreeChambers\Outputs' ;
         end
         journalFolder = outputFolder;
                

@@ -1,6 +1,6 @@
-  clear all; clc
-  path=['C:\Users\epetru\Desktop\Behavioral Analysis\aIC-BLA Eli\NSFT\20230502_NSFT_aIC-BLA\Outputs\HFD plot'];
-  outputpath=['C:\Users\epetru\Desktop\Behavioral Analysis\aIC-BLA Eli\NSFT\20230502_NSFT_aIC-BLA\Outputs\HFD plot'];
+ clear all; clc
+  path=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_NAc\NSFT_Zscore\output\heatmaps\HFD'];
+  outputpath=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_NAc\NSFT_Zscore\output\heatmaps\HFD'];
   dirOutput=dir(fullfile(path,'*.mat'));
   fileNames={dirOutput.name};
   n=length(fileNames); 
@@ -11,13 +11,22 @@
       
    tmp_file=char(fileNames(i));
    tmp_path=[path filesep tmp_file];
+
    load(tmp_path)
-   ii = isnan(experiment.map.NormSig.IO);
-   experiment.map.NormSig.IO(ii)=0;
-   gaussFilt_PercAvgSigMap = imgaussfilt(experiment.map.NormSig.IO,experiment.p.PhotometrySignalMap_sigmaGaussFilt);
-   gaussFilt_PercAvgSigMap(ii)=nan;
-   gaussFilt_PercAvgSigMap=gaussFilt_PercAvgSigMap./max(gaussFilt_PercAvgSigMap(:));
-   map(:,:,i)=gaussFilt_PercAvgSigMap;
+
+   PercAvgSigMap = experiment.map.NormSig.IO;
+
+   if experiment.p.PhotometrySignalMap_sigmaGaussFilt
+       ii = isnan(experiment.map.NormSig.IO);
+       experiment.map.NormSig.IO(ii)=0;
+       gaussFilt_PercAvgSigMap = imgaussfilt(experiment.map.NormSig.IO,experiment.p.PhotometrySignalMap_sigmaGaussFilt);
+       gaussFilt_PercAvgSigMap(ii)=nan;
+       gaussFilt_PercAvgSigMap=gaussFilt_PercAvgSigMap./max(gaussFilt_PercAvgSigMap(:));   
+       PercAvgSigMap = gaussFilt_PercAvgSigMap;
+   end
+
+
+   map(:,:,i)=PercAvgSigMap;
         
   end 
     map=nanmean(map, 3);
@@ -55,4 +64,4 @@
     print(filename,'-djpeg','-painters','-r1200');
     %close(figure(1))
   %  print(f,figName,'-djpeg');
-    %close(f);
+    %close(f)

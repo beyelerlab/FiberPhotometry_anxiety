@@ -13,5 +13,4 @@ pData.transients2continuous([pData.transients.loc])=1;
 
 forceRedrawing=p.forceRedrawing;
 
-% experiment.pData=pData;
 experiment.pData=pData;

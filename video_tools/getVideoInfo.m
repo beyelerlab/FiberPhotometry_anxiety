@@ -12,7 +12,10 @@ function videoInfo=getVideoInfo(params)
     videoInfoPath = [params.dataRoot  filesep params.dataFileTag '-videoInfo.mat'];
     if ~exist(videoInfoPath,'file')
         videoPath = [params.dataRoot filesep params.dataFileTag '.' params.videoExtension];
-        videoInfo = VideoReader(videoPath);
+        
+        tmp = VideoReader(videoPath);
+        videoInfo = struct();
+        videoInfo.FrameRate = tmp.FrameRate;
         save(videoInfoPath,'videoInfo');
     else
         try
