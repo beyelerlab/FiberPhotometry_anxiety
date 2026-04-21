@@ -29,6 +29,7 @@ end
 
 warning('behavior video frame is set to %f Hz', framerate);
 if p.WarningBehaviorFrameRate
+    fprintf('PRESS ENTER TO CONTINUE ANLAYSIS\n You can change it in getConfig_PB p.WarningBehaviorFrameRate = 0;')
     pause();
 end
 

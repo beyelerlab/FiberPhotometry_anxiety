@@ -82,7 +82,7 @@ function experiment = preprocessEvents(experiment)
 
     dt_min_msec = experiment.p.minimum_gap_between_events_msec;
     warning(sprintf('Warning you are going to remove events that are too close to each other (dt < %d msec)',dt_min_msec));
-    beep();
+    % beep();
     warning('cleaning events only works for home-made Hamamatsu system');
     idx_synchro=cleanEvents(idx_synchro,dt_min_msec,sfreq);
     
@@ -92,7 +92,7 @@ function experiment = preprocessEvents(experiment)
     end
 
     if strcmp(experiment.p.apparatus.type, 'EPM')
-        experiment.idx_synchro = {{experiment.vData.eOA.idx, 'OpenArmEntries'}, {experiment.vData.eCA.idx, 'ClosedArmEntries'}}
+        experiment.idx_synchro = {{experiment.vData.eOA.idx, 'OpenArmEntries'}, {experiment.vData.eCA.idx, 'ClosedArmEntries'}, {experiment.vData.eCenter.idx, 'CenterEntries'}}
     else
         experiment.idx_synchro = {{idx_synchro, ''}}
     end

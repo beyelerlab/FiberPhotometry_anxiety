@@ -112,6 +112,7 @@ for iFolder=1:nFolders
             experiment = getZonesStatistics_PB(experiment);
             
             experiment = getZonesStatistics_TimeBins_PB(experiment);
+
             
             if experiment.p.map_linearization                              
                 % for test you can use the test-block #1 located at the end of this file
@@ -129,7 +130,6 @@ for iFolder=1:nFolders
 
             %% WARNING mouseXXX-events.txt need to be resample if behavior and photometry camera doesn't have same sampling rate
             %% Events from RWD Events.csv file are already sampled has photometry data and saved as mouseXXX_events_idxsynchro.txt'
-
             experiment = preprocessEvents(experiment);
             if ~isempty(experiment.idx_synchro{1}{1})
                 nEventTypes = size(experiment.idx_synchro,2);
@@ -144,6 +144,9 @@ for iFolder=1:nFolders
                 end
                 experiment.idx_synchro=idx_synchro;
             end
+
+
+
         end
 
            

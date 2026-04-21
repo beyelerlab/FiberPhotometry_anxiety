@@ -24,7 +24,7 @@ x = experiment.vData.mainX_cmSP;
 y = experiment.vData.mainY_cmSP;
 
 e = diff(z);e = find(e~=0)+1;n = size(e,1);
-eOA = [];eCA = [];
+eOA = []; eCA = []; eCenter = [];
 
 traceLength = 80;
 % c = colormap(jet(traceLength*2+1));
@@ -57,16 +57,19 @@ for i=1:n
         case 3
             eOA= [eOA idx];
         case 4
-            eCA= [eCA idx];            
+            eCA= [eCA idx];   
+        case 5
+            eCenter= [eCenter idx];                
     end    
 end
 
 experiment.vData.eOA.idx = eOA;
 experiment.vData.eCA.idx = eCA;
+experiment.vData.eCenter.idx = eCenter;
 
 experiment.vData.eOA.tps = eOA/sfreq;
 experiment.vData.eCA.tps = eCA/sfreq;
-
+experiment.vData.eCenter.tps = eCenter/sfreq;
 
 
 

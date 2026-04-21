@@ -93,7 +93,7 @@ function experiment = eventBasedAnalysis_20250227_PB(experiment)
         suffix = 'events';
         figureSubFolder = [params.figureFolder filesep suffix];
         if ~exist(figureSubFolder,'dir'),mkdir(figureSubFolder);end
-        figName = [figureSubFolder filesep params.dataFileTag '-' suffix '.jpeg'];
+        figName = [figureSubFolder filesep params.dataFileTag '-' event_name '.jpeg'];
         fig_=figure("Name", event_name);
         hold on
         plot(experiment.pData.bulkPETH.matrix','color',[0.5 0.5 0.5])

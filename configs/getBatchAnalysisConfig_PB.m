@@ -52,7 +52,7 @@ switch batchID
         analysisParameters.map_linearization = 1;
 
         %To analyse arm entries or arm exits
-        analysisParameters.event_analysis = 0;
+        analysisParameters.event_analysis = 1;
                          
        
     %% Sucrose In OFT SPECIFIC PARAMETERS
