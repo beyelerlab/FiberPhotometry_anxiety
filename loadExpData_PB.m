@@ -4,7 +4,6 @@ function experiment = loadExpData_PB(p)
 vData = getVideoTrackingData(p);
 % vData.bg=getBackGroundSlow(p);
 [pData, p] = loadPhotometryData(p);
-[pData, p] = loadPhotometryData(p);
 
 % if ~isfield(vData.videoInfo,'FrameRate')
 %     vData.videoInfo=getVideoInfo(p);
@@ -14,15 +13,25 @@ vData = getVideoTrackingData(p);
 % end
 
 
+
 if exist([p.dataRoot filesep sprintf('%s-fr.txt',p.dataFileTag)],'file')
     framerate = load([p.dataRoot filesep sprintf('%s-fr.txt',p.dataFileTag)]);
+    warning('behavior video, not correct, the frame rate has been specified in -fr.txt');
 else
     if ~isfield(vData.videoInfo,'FrameRate')
         framerate = 20;
+        warning('behavior video frame rate unknonw, it is set to 20Hz');
     else
         framerate = vData.videoInfo.FrameRate;
+        warning('behavior video frame is directly taken from the video file');
     end
 end
+
+warning('behavior video frame is set to %f Hz', framerate);
+if p.WarningBehaviorFrameRate
+    pause();
+end
+
 
 if (framerate ~= p.HamamatsuFrameRate_Hz)
 

@@ -60,7 +60,6 @@ p.eventBasedAnalysisMinMaxWindow_msec = [-5000 2000];
 % If you would like to divide the analysis in sub time periods you could
 
 % define a serie of periods, p.time_bins_sec = start:step:stop
-p.time_bins_sec = 0:300:600:900
 
 % you can also define periods of different duration, define them one by one like p.time_bins_sec = [0,100,300,600]
 
@@ -70,11 +69,15 @@ p.time_bins_sec = 0:300:600:900
 % photobleaching when you start at 0, the removed part will not be included
 % 
 % p.time_bins_sec = [0 900];
+p.time_bins_sec = 0:300:900;
 
 
 % p.firstLickTh_msec = 10000;
 
 p.protectMe = 0;
+
+% If you are not sure of the frame rate of the behavioral video
+p.WarningBehaviorFrameRate = 1;
 
 p.results = p.journal;
 

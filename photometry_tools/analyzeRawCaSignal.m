@@ -8,12 +8,13 @@ function Ca=analyzeRawCaSignal(experiment)
     ref = pData.ref;
     t = pData.T;
     t0 = pData.t0;
-    debug = 1;
+    debug = 0;
 
     frameRate_Hz = params.HamamatsuFrameRate_Hz;
     nSamples = size(sig,1);
     Ca = processBulkSignal(sig,ref,frameRate_Hz,removeFirstMinute);
-    Ca.transients = get_transients(Ca.T, Ca.dff, debug);
+    plotTitle = 'zscored DFF';
+    Ca.transients = get_transients(Ca.T, Ca.mainSig, debug, plotTitle);
     Ca.t0 = t0;
 end
 
@@ -111,13 +112,13 @@ end
 
 
 
-function transients = get_transients(t, dff, debug)
+function transients = get_transients(t, mainSig, debug, plotTitle)
 
     fs = 1/median(diff(t));
-    MinPeakProminence = median(dff) + (1.5*mad(dff));
+    MinPeakProminence = median(mainSig) + (1.5*mad(mainSig));
     MinPeakGap_s = 0.5;
     MinPeakDistance = floor(MinPeakGap_s * fs);
-    [pks,locs,w,p] = findpeaks(dff, 'MinPeakDistance', MinPeakDistance, 'MinPeakProminence', MinPeakProminence);
+    [pks,locs,w,p] = findpeaks(mainSig, 'MinPeakDistance', MinPeakDistance, 'MinPeakProminence', MinPeakProminence);
     
     transients.time = t(locs);
     transients.loc = locs;
@@ -132,7 +133,7 @@ function transients = get_transients(t, dff, debug)
     if debug
         n = size(locs,1);
         fig = figure();
-        plot_transients(transients,t,dff,'dff');
+        plot_transients(transients,t,mainSig, plotTitle);
     end
 
 end

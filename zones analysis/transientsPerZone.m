@@ -1,6 +1,7 @@
 function transientStats=transientsPerZone(inZone,nZones,zoneTime_fr,transients)
 
 transientStats.zonesMeanAmp=nan(1,nZones);
+transientStats.zonesMeanWidth=nan(1,nZones);
 transientStats.zonesCounts=nan(1,nZones);
 transientStats.zonesProba=nan(1,nZones);
 
@@ -14,8 +15,11 @@ for iZone=1:nZones
     idx=find(transientStats.zones==iZone);
     idx = [TransientsInstances(idx)];
     vMax = [transients.prominence];
+    transientWidth = [transients.width];
+    transientWidth = transientWidth(idx);
     vMax = vMax(idx);
     transientStats.zonesMeanAmp(iZone) = nanmean(vMax);
+    transientStats.zonesMeanWidth(iZone) = nanmean(transientWidth);
 end
 transientStats.zones(~logical(transientStats.zones))=[];
 [transientStats.zonesCounts,e]=histcounts(transientStats.zones,1:nZones+1);

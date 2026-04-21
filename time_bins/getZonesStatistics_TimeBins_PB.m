@@ -13,7 +13,7 @@ function experiment = getZonesStatistics_TimeBins_PB(experiment)
         pause
     end
 
-    varNames = {'timeInZone_sec', 'bulkSignal', 'transientsAmplitude.', 'transientsFrequency', 'freezing'};        
+    varNames = {'timeInZone_sec', 'bulkSignal', 'transientsAmplitude.', 'transientsFrequency', 'freezing', 'transientsWidth'};        
    
     
     [fods, p] = createFiles(varNames, p, vData.nZones);
@@ -31,9 +31,10 @@ function experiment = getZonesStatistics_TimeBins_PB(experiment)
         Y_cmSP_tmp = vData.mainY_cmSP(iFrame1:iFrame2);
         inZone_tmp=position2zone(X_cmSP_tmp,Y_cmSP_tmp,vData.zones_cmSP);
         nZones = size(vData.zones_cmSP,2);
+        % disp(size(inZone_tmp))
         [zoneTime_fr_tmp,outTime_fr_tmp]=framesInZone(inZone_tmp,nZones);
 
-        selected_transients = select_transients(pData.transients, iFrame1, iFrame2)
+        selected_transients = select_transients(pData.transients, iFrame1, iFrame2);
         
         pData.transientPeriodStats{iTimePeriod}=transientsPerZone(inZone,nZones,zoneTime_fr_tmp,selected_transients);
         pData.bulkPeriodStats{iTimePeriod} = bulkSignalPerZone(inZone_tmp,nZones,zoneTime_fr_tmp,pData.mainSig(iFrame1:iFrame2));
@@ -47,7 +48,7 @@ function experiment = getZonesStatistics_TimeBins_PB(experiment)
 
         vData.freezingPeriodStats{iTimePeriod} = freezingSignalPerZone(inZone_tmp,nZones,zoneTime_fr_tmp,vData.freezing(iFrame1:iFrame2), framerate);  
         
-        datas = {(zoneTime_fr_tmp'/framerate), pData.bulkPeriodStats{iTimePeriod }.zonesMeanAmp, pData.transientPeriodStats{iTimePeriod}.zonesMeanAmp, (pData.transientPeriodStats{iTimePeriod}.zonesCounts./(zoneTime_fr_tmp'/framerate)), vData.freezingPeriodStats{iTimePeriod}.zonesFreezingTime};
+        datas = {(zoneTime_fr_tmp'/framerate), pData.bulkPeriodStats{iTimePeriod }.zonesMeanAmp, pData.transientPeriodStats{iTimePeriod}.zonesMeanAmp, (pData.transientPeriodStats{iTimePeriod}.zonesCounts./(zoneTime_fr_tmp'/framerate)), vData.freezingPeriodStats{iTimePeriod}.zonesFreezingTime, pData.transientPeriodStats{iTimePeriod}.zonesMeanWidth};
         popFiles(fods, varNames, datas, vData.nZones)
                 
         iFrame1 = iFrame2+1;
@@ -81,7 +82,7 @@ function selected_transients = select_transients(tr, frame_start_idx, frame_stop
     'width',tr.width(toKeep),...
     'prominence',tr.prominence(toKeep),...
     'MinPeakDistance',tr.MinPeakDistance,...
-    'MinPeakProminence',tr.MinPeakProminence)
+    'MinPeakProminence',tr.MinPeakProminence);
     
     
 end
