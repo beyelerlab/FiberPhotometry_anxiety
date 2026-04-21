@@ -112,26 +112,6 @@ end
 
 
 function transients = get_transients(t, dff, debug)
-    
-        
-%     lowPassTh_Hz= 0.5;
-%     highPassTh_Hz= 2;
-    
-    % filterType = 'bandpass';
-%     fc = [lowPassTh_Hz highPassTh_Hz];
-%     
-%     
-%     filterType = 'low';
-%     fc = lowPassTh_Hz;
-%     
-%     fs = 1/median(diff(t));
-%     [b,c] = butter(4,fc/(fs/2),filterType);
-%     
-%     nan_idx = isnan(dff)
-%     
-%     dff(nan_idx)=0;
-%     
-%     filtered_sig = filtfilt(b, c, dff);
 
     fs = 1/median(diff(t));
     MinPeakProminence = median(dff) + (1.5*mad(dff));
@@ -142,7 +122,9 @@ function transients = get_transients(t, dff, debug)
     transients.time = t(locs);
     transients.loc = locs;
     transients.peak = pks;
-    transients.width = w;
+
+    %20260421 Trasients width in sec instead of samples
+    transients.width = w/fs;
     transients.prominence = p;
     transients.MinPeakDistance = MinPeakDistance;
     transients.MinPeakProminence =MinPeakProminence;
@@ -177,7 +159,7 @@ function plot_transients(transients_,t,sig,sig_str)
         y_ = sig(i);
         plot([x_ x_],[y_ sup_], 'm')
         plot(x_,sup_,'m*')
-%         text(x_,sup_ + (amp_/10),sprintf('w=%2.2f, p=%2.2f',w_(k),p_(k)),'FontSize', 6,'Rotation',90);
+        text(x_,sup_ + (amp_/10),sprintf('w=%2.2f, p=%2.2f',w_(k),p_(k)),'FontSize', 6,'Rotation',90);
     end
     legend({sig_str})
 
