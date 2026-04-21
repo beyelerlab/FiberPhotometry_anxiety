@@ -1,5 +1,6 @@
-%% 
-%% 
+%% time tracking
+% SD: 20231023, 0.5h
+% SD 20231025, 10 min.
 
 
 % updated on March 8, 2022. Beyeler lab, INSERM.
@@ -18,7 +19,7 @@ tic;t0=toc;
 % batchID is a unique identifier for selecting the proper test.
 % for elevated plus maze - batchID= 'test_EPM'
 % for open-feild test - batchID='test_OFT'
-% for sucrose-quinine test - batchID='test_SQ'
+% for sucrose-quinine test - batchID='test_Sucrose-Quinine'
 % for foot shock test -  batchID='test_footshock'
 
 batchID='test_EPM';
@@ -109,7 +110,7 @@ for iFolder=1:nFolders
             experiment = getApparatusZones(experiment);      
 
             experiment = getZonesStatistics_PB(experiment);
-
+            
             experiment = getZonesStatistics_TimeBins_PB(experiment);
             
             if experiment.p.map_linearization                              

@@ -139,7 +139,7 @@ end
     if ~isfield(bonsai_output.videoInfo,'FrameRate')
         bonsai_output.videoInfo=getVideoInfo(params);    
         if ~isfield(bonsai_output.videoInfo,'FrameRate')
-            framerate = 20;
+            framerate = 30;
         end
     else
         framerate=bonsai_output.videoInfo.FrameRate;

@@ -4,6 +4,7 @@ function experiment = loadExpData_PB(p)
 vData = getVideoTrackingData(p);
 % vData.bg=getBackGroundSlow(p);
 [pData, p] = loadPhotometryData(p);
+[pData, p] = loadPhotometryData(p);
 
 % if ~isfield(vData.videoInfo,'FrameRate')
 %     vData.videoInfo=getVideoInfo(p);
@@ -88,7 +89,7 @@ end
 % 
 % end
 
-if p.bonzaiDone
+if p.bonzaiDone && strcmp(p.system, 'FIP')
     [pData,vData] =  HamamatsuBlackFlyCorrectFrameNumbers(pData,vData,p);
 end
 
@@ -135,7 +136,7 @@ if isempty(iBehavioralStarts), iBehavioralStarts=0; end
 % end
 
 %% DETECT EXPERIMENTER STARTS BEHAVIOR
-nFramesToRemove = max([p.HamamatsuFrameRate_Hz*p.remove_high_bleaching_period_sec iBehavioralStarts(1)]); %remove the first minute of the signal due to bleeching at the beginning of the fiber-photometry recording
+nFramesToRemove = ceil(max([p.HamamatsuFrameRate_Hz*p.remove_high_bleaching_period_sec iBehavioralStarts(1)])); %remove the first minute of the signal due to bleeching at the beginning of the fiber-photometry recording
 
 %% DETECT EXPERIMENTER STARTS BEHAVIOR IS TOO DIFFICULT FOR NSFT
 if strcmp(p.apparatus.type,'NSFT')
