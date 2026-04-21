@@ -1,7 +1,7 @@
 clear all; clc
 
 %% Paths
-path = 'C:\Users\lpages\Desktop\FS_Zscore\output_test\plot\HFD';
+path = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_BLA\202512_plot_FS\HFD';
 outputpath = path;
 
 %% Parameters

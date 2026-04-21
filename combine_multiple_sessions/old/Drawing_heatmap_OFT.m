@@ -1,6 +1,6 @@
  clear all; clc
-  path=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_NAc\NSFT_Zscore\output\heatmaps\HFD'];
-  outputpath=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_NAc\NSFT_Zscore\output\heatmaps\HFD'];
+  path=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\OFT_Zscore\heat_maps_zscore\HFD'];
+  outputpath=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\OFT_Zscore\heat_maps_zscore\HFD'];
   dirOutput=dir(fullfile(path,'*.mat'));
   fileNames={dirOutput.name};
   n=length(fileNames); 

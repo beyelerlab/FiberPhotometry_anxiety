@@ -1,6 +1,6 @@
 clear all; clc
-path=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\plot\HFD'];
-outputpath=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\plot\HFD'];
+path=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_NAc\FS_Zscore\plot_all_mice\SD'];
+outputpath=['S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_NAc\FS_Zscore\plot_all_mice\SD'];
 dirOutput=dir(fullfile(path,'*.mat'));
 fileNames={dirOutput.name};
 n=length(fileNames);

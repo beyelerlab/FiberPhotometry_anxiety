@@ -1,0 +1,128 @@
+%
+%
+clear all; clc
+
+%   load('mamap.mat');
+
+path='S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\EPM_Zscore\output2\good_heatmaps\SD';
+outputpath='S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\EPM_Zscore\output2\good_heatmaps\SD';
+
+dirOutput=dir(fullfile(path,'*.mat'));
+fileNames={dirOutput.name};
+n=length(fileNames);
+map=nan(150,150,n);
+occ_map = nan(150,150,n);
+
+
+for i=1:n
+    
+    tmp_file=char(fileNames(i));
+    tmp_path=[path filesep tmp_file];
+    load(tmp_path)
+    ii = isnan(experiment.map.NormSig.IO);
+    experiment.map.NormSig.IO(ii)=0;
+    gaussFilt_PercAvgSigMap = imgaussfilt(experiment.map.NormSig.IO,2);
+    gaussFilt_PercAvgSigMap(ii)=nan;
+    % gaussFilt_PercAvgSigMap=gaussFilt_PercAvgSigMap./max(gaussFilt_PercAvgSigMap(:));
+    % map(:,:,i)=gaussFilt_PercAvgSigMap;
+
+    map(:,:,i)=experiment.map.NormSig.IO;
+
+
+    occ_map(:,:,i)=experiment.map.Occ.IO;
+    
+    xMax=experiment.p.xMax/0.5;
+    yMax=experiment.p.yMax/0.5;
+    apparatusDesign_cmSP = experiment.apparatusDesign_cmSP;
+    
+    filename = [outputpath filesep 'Heatmap_' experiment.p.dataFileTag];
+
+    % plot_heatmap(gaussFilt_PercAvgSigMap, experiment.map.Occ.IO, xMax, yMax, apparatusDesign_cmSP, filename, experiment)  
+    
+end
+
+
+
+
+map=nanmean(map, 3);
+occ_map = nansum(occ_map, 3);
+
+imagesc(map)
+
+
+xMax=experiment.p.xMax/0.5;
+yMax=experiment.p.yMax/0.5;
+apparatusDesign_cmSP = experiment.apparatusDesign_cmSP;
+
+filename = fullfile(outputpath,'Heatmap');
+
+plot_heatmap(map, occ_map, xMax, yMax, apparatusDesign_cmSP, filename, experiment);
+
+
+
+
+function plot_heatmap(map, occ_map, xMax, yMax, apparatusDesign_cmSP, filename, experiment)
+
+
+ii = find(occ_map==0);
+map(ii)=NaN;
+
+f=figure(1)
+axis equal
+axis off
+hold on
+
+xlim([0 xMax])
+ylim([0 yMax])
+set(gca,'Ydir','reverse')
+
+colormap([1 1 1; jet(1024)]);
+
+
+im=imagesc(map);
+
+hBar=colorbar('horiz');
+box off
+caxis([-1,1])
+set(get(hBar,'title'),'string','\Delta F/F (%)','Fontname', 'Arial', 'Fontsize', 10)
+%set(hBar, 'Position', [0.624 0.046 0.2 0.02], 'YTickLabel', {'-1','0','3'},'Fontname', 'Arial', 'Fontsize', 10);
+set(0,'defaultfigurecolor','w')
+
+x=apparatusDesign_cmSP.x/0.5;
+y=apparatusDesign_cmSP.y/0.5;
+
+% Zone Ordering
+zones_ = experiment.vData.zones_cmSP;
+types_ = {zones_(:).type};
+idx_open = find(ismember(types_, 'open'));
+idx_closed = find(ismember(types_, 'closed'));
+idx_center = find(ismember(types_, 'center'));
+idx_ordered = [idx_open idx_closed idx_center];
+
+for iZ=1:size(idx_ordered,2)
+    type = zones_(idx_ordered(iZ)).type
+    if strcmp(type, 'center')
+        continue   
+    end
+    if strcmp(type, 'open')
+        linedef = '--k';
+    end
+    if strcmp(type, 'closed')
+        linedef = 'k';
+    end
+    hold on
+    x = zones_(idx_ordered(iZ)).xV/0.5;
+    y = zones_(idx_ordered(iZ)).yV/0.5;
+    x = [x x(1)];
+    y = [y y(1)];
+    plot(x,y, linedef, 'linewidth',1)
+    hold on
+end
+
+
+
+print(filename,'-depsc','-painters','-r1200');
+print(filename, '-dpdf');
+close(figure(1))
+
+end

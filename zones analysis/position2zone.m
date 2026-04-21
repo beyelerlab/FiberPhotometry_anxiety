@@ -2,7 +2,7 @@ function inZone=position2zone(xQ,yQ,zones)
 
 nZones=size(zones,2);
 inZone=zeros(size(xQ,1),nZones);
-     figure()
+     fig_=figure()
      hold on
      plot(xQ,yQ,'marker','.', 'Color',[0.9 0.9 0.9])
 for iZone=1:nZones    
@@ -15,5 +15,6 @@ for iZone=1:nZones
     inZone(:,iZone) =  inZone(:,iZone).*iZone;
 end
 inZone=nansum(inZone,2);
+close(fig_);
 end
 

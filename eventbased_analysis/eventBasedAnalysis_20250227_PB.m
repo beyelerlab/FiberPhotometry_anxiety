@@ -9,7 +9,7 @@ function experiment = eventBasedAnalysis_20250227_PB(experiment)
         idx_synchro = experiment.idx_synchro{1}';
     end
     
-    sfreq = experiment.p.HamamatsuFrameRate_Hz;
+    sfreq = round(experiment.p.HamamatsuFrameRate_Hz);
     nFrames = experiment.pData.nFrames;
     edges_msec = experiment.p.eventBasedAnalysisEdges_msec;
     binSizes = diff(edges_msec);
@@ -89,13 +89,19 @@ function experiment = eventBasedAnalysis_20250227_PB(experiment)
         experiment.pData.bulkPETH.zcored_min = min_;        
         experiment.pData.bulkPETH.zcored_max = max_;
         
-        
-        figure("Name", event_name);
+        params = experiment.p;
+        suffix = 'events';
+        figureSubFolder = [params.figureFolder filesep suffix];
+        if ~exist(figureSubFolder,'dir'),mkdir(figureSubFolder);end
+        figName = [figureSubFolder filesep params.dataFileTag '-' suffix '.jpeg'];
+        fig_=figure("Name", event_name);
         hold on
         plot(experiment.pData.bulkPETH.matrix','color',[0.5 0.5 0.5])
         plot(experiment.pData.bulkPETH.nanmean,'color',[0.5 0 0])
         plot(experiment.pData.bulkPETH.nanmean + experiment.pData.bulkPETH.nanstd,'color',[0.5 0 0], 'linestyle', ':');
         plot(experiment.pData.bulkPETH.nanmean - experiment.pData.bulkPETH.nanstd,'color',[0.5 0 0], 'linestyle', ':');
+        print(fig_,figName,'-djpeg');
+        close(fig_)
         
         % figure();
         % hold on

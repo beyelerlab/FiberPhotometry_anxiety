@@ -1,14 +1,14 @@
 clear all; clc; close all;
 
 
-p = 'S:\_Lea\1.Data\PhotoM\20251210_aIC_NAc_pIC\20251218_FS\Analysis\output_test\plot';
+p = 'S:\_Victor\DATA\Lars_129S_NSFT_4445\Analysis\plot\SD';
 l = dir([p filesep '*.mat']);
 
 
 
 for iMouse=1:length(l)
 
-    datapath = [p filesep l(iMouse).name];
+    datapath = [p filesep l(iMouse).name]
 
     load(datapath);
     peth = experiment.pData.bulkPETH.zcored_matrix;
@@ -18,6 +18,13 @@ for iMouse=1:length(l)
     if iMouse==1
         all_means = nan(length(l),nBins);
     end
+
+ % % Prendre seulement le premier événement qui ne contient pas de NaN
+    % if isfield(experiment.pData, 'avgBulkSignalAroundFood')
+    %     SignalaroundLicking(i,:) = experiment.pData.avgBulkSignalAroundFood;
+    % elseif isfield(experiment.pData.bulkPETH, 'matrix') && size(experiment.pData.bulkPETH.matrix, 1) >= 1
+    %     SignalaroundLicking(i,:) = experiment.pData.bulkPETH.matrix(1,:);
+    % end
 
     t_sec = experiment.p.eventBasedAnalysisEdges_msec/1000;
     peth_time = linspace(t_sec(1), t_sec(end), nBins);
@@ -51,6 +58,15 @@ for iMouse=1:length(l)
 
     peth_nanmean = nanmean(peth_fig);
     plot(peth_time, peth_nanmean, 'Color', [1 0.2 0.2]);
+
+% Resample si nécessaire pour correspondre à 401 points
+    % if length(peth_nanmean) ~= size(peth)
+    %     x_old = linspace(1, size(peth), length(peth_nanmean));
+    %     x_new = 1:size(peth);
+    %     peth_nanmean = interp1(x_old, peth_nanmean, x_new);
+    %     disp(['ℹ️ Signal de ' tmp_file ' resamplé de ' num2str(length(x_old)) ' → ' num2str(target_length) ' points']);
+    % end
+
     all_means(iMouse,:) = peth_nanmean(:,:);
 
     [nTrials, nBins] = size(peth_fig);

@@ -5,7 +5,7 @@
 
 shift_sec = 2;
 
-p = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\input';
+p = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_BLA\Analysis_all_aIC_BLA\FS_Zscore\input_victor';
 l = dir([p filesep '*-bonsai.txt']);
 
 for i=1:length(l)

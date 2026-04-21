@@ -1,4 +1,4 @@
-cd 'S:\_Lea\1.Data\20251125_aIC-aIC_aIC-LHr\20251125_EPM\plot_sig_EPM'
+cd 'S:\_Lea\1.Data\PhotoM\20260210_review_B1\20260210_EPM\plot_EPM'
 %% PLOT FITTED DFF
 close all; clear all;
 files = dir('*.mat');

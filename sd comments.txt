@@ -1,24 +1,63 @@
+
 Pour les heatmaps, on a retirer le filtre gaussien lors de la creation d'une carte pour une souris, il faudrait le faire après avoir moyenner toutes les souris.
 => il faudrait ajouter un flag pour le faire ou ne pas le faire.
 
-
-
+updated on 30/01/26
+new script : draw_averaged_heatmaps
+=> add map_mask pour cleaner ce qui dans ou en dehors de la zone 
+=> filtre gaussien appliqué à la fin des average heatmap all mice => valeur 0.75, ce filtre appliqué permet de se rapprocher au max des raw heatmaps (sans filtre appliqué) donc polit un peu la heatmap
+=> version customize plot = avec filtre, sauvegarde deux fichiers heatmap_wo_smoothing et heatmap_gaussian_smoothing
+=> ce script peut être utilisé aussi pour OFT, NSFT (batch_ID)
 
 
 lea_tools => FS_combine and shift_led_in_time and shift_manybonsai
 
-Pour aligner les FS de deux différents set up (ancien FS box shock après LED ON à 2s et nouveau set up FS shock conditionning room direct après LED donc à 1sec)
+- Pour aligner les FS de deux différents set up (ancien FS box shock après LED ON à 2s et nouveau set up FS shock conditionning room direct après LED donc à 1sec)
 
-décaler de 2sec vers la gauche (anciens batchs) => shift down by 2
-modif getVideoTrackingData pour que matlab lise le bonsai shifted qui remplace le bonsia initial
-
-Dans shift_many_bonsai
-copier le path input 
-
-Sift-led-in-time va créer le bonsia shifted
+=> Dans shift_many_bonsai
+=> copier le path input 
+=> Shift-led-in-time va créer le bonsai shifted (décaler de 2sec vers la gauche (anciens batchs)= shift down by 2)
+=> modif faites dans le getVideoTrackingData pour que matlab lise le bonsai shifted qui remplace le bonsai initial
 
 
-FS_combine
-peri histo/mouse/shock
-peri histo average all mice/shock
-centré sur onset de l'event=shock= à 0sec
+- new script: FS_combine 
+=> peri histo/mouse/shock
+=> peri histo average all mice/shock
+=> centré sur onset de l'event=shock= à 0sec
+
+Ce script est utilisable pour les autres types d'évènements: tail suspension, SQ lick, bite NSFT
+Vérifier le délai entre deux évènements => peut être modifié dans getConfig_PB (p;minimum_gap_between_events_msec=1000 donc 1sec)
+Pour bite pas trop long ? 
+
+
+
+- special analyze for one batch for FS
+=> Analyse RWD FS TTL because the second LED of the second box not working
+instead of taking the same bonsai for mouse 1(box 1) and mouse 2 (box) 2=> used the RWD ch 1 (mouse 1) and ch2 (mouse 2)
+we analyzed this batch with RWD trigger by FS box (box 1 and 2 starting at the same time with the RWD)
+
+reorganized_data_2ch_TTL
+FS => events extrais via photoM RWD TTL
+_events_idxsynchro.txt
+
+ensuite 2e
+=> script: dupplicate bonsai to rename bonsai, même bonsai souris 1 et 2 runnées dans deux FS boxs en même temps
+avoir experiment_schedule.txt dans input
+=> 2 colonnes Box, Box avec souris
+
+example:
+
+Box 1   Box 2
+F4526   F4527
+
+pas besoin de re sample le fichier _events_idx_synchro.txt car synchro par le TTL RWD FS box
+
+
+updated analysis RWD bite NSFT 01/26
+events extraits des kdenlive => events.txt
+ce fichier est maintenant re sample comme on le fait pour les bonsai afin d'enlever la minute de photobleeshing
+re runner avec nouvelle version du code les analyses NSFT qui ont été runnées avant cet update
+
+
+
+

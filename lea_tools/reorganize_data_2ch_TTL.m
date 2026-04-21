@@ -1,7 +1,7 @@
 clc; clear; close all
 
 % fip = "E:\NAS_SD\SuiviClient\Beyeler\DATA\20230502_NSFT\Inputs\F2434.mat"
-data_root = 'S:\_Lea\1.Data\PhotoM\20251210_aIC_NAc_pIC\20251218_FS'
+data_root = 'S:\_Lea\1.Data\PhotoM\20260223_reviewB2\20260305_FS'
 
 only_one_TTL = true
 

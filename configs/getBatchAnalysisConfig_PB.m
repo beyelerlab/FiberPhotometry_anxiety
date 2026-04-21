@@ -6,9 +6,9 @@ switch batchID
     %% OFT SPECIFIC PARAMETERS
     case 'test_OFT'                
 
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20260119_Carolina\SI-FiberAdult\OFT_SI-FiberAdult';       
+        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\OFT_Zscore\input';       
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20260119_Carolina\SI-FiberAdult\OFT_SI-FiberAdult\Analysis';
+            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\OFT_Zscore\output_zscore_time_bins';
         end
         
         journalFolder =  outputFolder;
@@ -29,9 +29,9 @@ switch batchID
                 
     %% EPM SPECIFIC PARAMETERS
     case 'test_EPM'
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250923_EPM';
+        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\EPM_Zscore\input';
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20250923_EPM\Analysis\Output';
+            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250408_all_aIC\EPM_Zscore\output_zscore_time_bins';
         end
         
         journalFolder = outputFolder;
@@ -58,9 +58,9 @@ switch batchID
     %% Sucrose In OFT SPECIFIC PARAMETERS
     case 'test_SQ'
         
-        dataRoot{1} =  'S:\_Céline\Manips\Manip for paper anxiety\2. REVISION 2\QUININE ALL\INPUT pIC';
+        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_BLA\Analysis_all_aIC_BLA\SQ_Zscore\Quinine\input';
         if isempty(outputFolder)
-            outputFolder = 'S:\_Céline\Manips\Manip for paper anxiety\2. REVISION 2\QUININE ALL\OUTPUT pIC' ;
+            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_BLA\Analysis_all_aIC_BLA\SQ_Zscore\Quinine\output' ;
         end
         journalFolder = outputFolder;
         
@@ -73,7 +73,7 @@ switch batchID
         apparatus{1}.Model='Yifan';
         apparatus{1}.side_cm = 60; % Open Arms Envergure
         
-        videoExt{1}='avi';   
+        videoExt{1}='mp4';   
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 0;
@@ -105,14 +105,14 @@ switch batchID
         
         %% fOOTSHOCK SPECIFIC PARAMETERS    
     case 'test_footshock'
-        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\input';
+        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_BLA\Analysis_all_aIC_BLA\FS_Zscore\input_mp4';
         if isempty(outputFolder)
-            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_GCaMP_aIC_pIC\20250502_all_pIC\FS_Zscore\output' ;
+            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_BLA\Analysis_all_aIC_BLA\FS_Zscore\output_mp4' ;
         end
         journalFolder = outputFolder;
                
         analysisParameters.apparatusNormalizationRequested = 0;
-        analysisParameters.apparatusCenterZoneSize_propOfTotalArea = 0.00001;
+        analysisParameters.apparatusCenterZoneSize_propOfTotalArea = 0.1;
         analysisParameters.MouseCoordinatesCentroid = 'Body';
         analysisParameters.MapScale_cmPerBin = 0.5;
                 
@@ -127,18 +127,17 @@ switch batchID
         analysisParameters.map_linearization = 0;
         analysisParameters.event_analysis = 1;         
         
-    %% TailSuspension SPECIFIC PARAMETERS    
+    %% NSFT    
     case 'test_NSFT'
 
-        dataRoot{1} =  'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT';
+        dataRoot{1} =  'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_NAc\NSFT_Zscore\input';
         if isempty(outputFolder)
-            outputFolder = 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20250922_LBN7\20251003_NSFT\Analysis' ;
+            outputFolder = 'S:\_Lea\2.Analysis_PhotoM_Behavior_IHC\PhotoM_Analysis\all_aIC_NAc\NSFT_Zscore\output_big_center'
         end
-
         journalFolder = outputFolder;
-               
+        
         analysisParameters.apparatusNormalizationRequested = 0;
-        analysisParameters.apparatusCenterZoneSize_propOfTotalArea = 0.1;
+        analysisParameters.apparatusCenterZoneSize_propOfTotalArea = 0.5; %For big center write 0.5 (50%) and small 0.1 (10%)
         analysisParameters.MouseCoordinatesCentroid = 'Body';
         analysisParameters.MapScale_cmPerBin = 0.5;
                 
@@ -146,7 +145,7 @@ switch batchID
         apparatus{1}.Model='';
         apparatus{1}.side_cm = 60;
         
-        videoExt{1}='mp4';   
+        videoExt{1}='avi';   
         
         analysisParameters.spatial_analysis = 1;
         analysisParameters.map_linearization = 0;
@@ -159,8 +158,6 @@ switch batchID
         
     %% THREE CHAMBERS SPECIFIC PARAMETERS    
     case 'test_ThreeChambers'
-
-
         
         dataRoot{1} =  'E:\NAS_SD\SuiviClient\Beyeler\DATA\TestTransientDetection\Inputs';
         if isempty(outputFolder)
@@ -205,10 +202,3 @@ analysisParameters.journal = readtable([journalFolder filesep 'Journal.xlsx']);
 analysisParameters.batchID = batchID;
 
 analysisParameters = getConfig_PB(analysisParameters,outputFolder,apparatus,videoExt);
-
-
-
-
-
-
-

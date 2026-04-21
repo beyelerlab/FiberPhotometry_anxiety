@@ -1,4 +1,4 @@
-cd 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20260119_Carolina\SI-FiberAdult\OFT_SI-FiberAdult\Signal Plot'
+cd 'S:\___DATA\PhotometryAndBehavior\01_DATA\ONE_COLOR\20260323_CRH_B5\Signal check\40µW\plot_sig'
 %% PLOT FITTED DFF
 close all; clear all;
 files = dir('*.mat');
@@ -17,8 +17,8 @@ for i = 1:length(files)
 end
 linkaxes(Ax,'x');
 set(Ax,'xlim',[1 18000]);
-saveas(figure(1),'Carolina_OFT__AM.fig');
-saveas(figure(1),'Carolina_OFT__AM.png');
+saveas(figure(1),'sig_check_fitted_dff.fig');
+saveas(figure(1),'sig_check_fitted_dff.png');
 
 %% PLOT RAW
 close all; clear all;
@@ -34,8 +34,8 @@ for i = 1:length(files)
 end
 linkaxes(Ax,'x');
 set(Ax,'xlim',[1 18000]);
-saveas(figure(1),'Carolina_OFT_baseline.fig');
-saveas(figure(1),'Carolina_OFT_baseline.png');
+saveas(figure(1),'raw.fig');
+saveas(figure(1),'raw.png');
 
 %% PLOT DFF
 close all; clear all;
@@ -53,8 +53,8 @@ for i = 1:length(files)
     plot(finaldff((3:end),:),'Color',[0 0.4470 0.7410]); hold all;
    title(files(i).name)
 end
-saveas(figure(1),'Carolina_OFT_dff');
-saveas(figure(1),'Carolina_OFT_dff.png');
+saveas(figure(1),'dff.fig');
+saveas(figure(1),'dff.png');
 
 %% CONVERT FILES
 files = dir('*.mat');
@@ -87,8 +87,8 @@ end
 linkaxes(Ax,'x');
 set(Ax,'xlim',[1000 2000]);
 
-saveas(figure(1),'Carolina_OFT_baseline_dff.fig');
-saveas(figure(1),'Carolina_OFT_baseline_dff.png');
+saveas(figure(1),'dff.fig');
+saveas(figure(1),'dff.png');
 
 
 %% PLOT FITTED DFF - old data
@@ -106,5 +106,5 @@ for i = 1:length(files)
 end
 linkaxes(Ax,'x');
 set(Ax,'xlim',[1 18000]);
-saveas(figure(1),'Carolina_OFT_baseline_dff.fig');
-saveas(figure(1),'Carolina_OFT_baseline_dff.png');
+saveas(figure(1),'fitted_dff.fig');
+saveas(figure(1),'fitted_dff.png');

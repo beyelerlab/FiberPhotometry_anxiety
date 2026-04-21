@@ -3,7 +3,7 @@
 function shift_led_in_time(shift_sec, p)
 
     [filepath, name, ext] = fileparts(p);
-    v = [filepath filesep name(1:end-7) '.mp4']
+    v = [filepath filesep name(1:end-7) '.avi']
     
     v = VideoReader(v);
     shift_frame = shift_sec*v.FrameRate;

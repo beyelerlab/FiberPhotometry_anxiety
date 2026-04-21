@@ -8,7 +8,7 @@ function Ca=analyzeRawCaSignal(experiment)
     ref = pData.ref;
     t = pData.T;
     t0 = pData.t0;
-    debug = 0;
+    debug = 1;
 
     frameRate_Hz = params.HamamatsuFrameRate_Hz;
     nSamples = size(sig,1);
